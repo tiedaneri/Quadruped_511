@@ -1,7 +1,8 @@
-简介：
+# 简介
     此工程为具有WBC的从机器人实机代码。
 
-指南:
+# 指南
+'''bash
     0. 在根目录CMakeLists.txt选择机器人的宏定义
     1. 在PC端的"robot_software/build"文件夹中打开终端
     2. 编译该工程。在终端中执行以下指令：
@@ -19,8 +20,9 @@
         {./run_robot.sh ./[user program name]}
     8. 结束程序指令按键：
         {Ctrl + C}
+'''
 
-注:
+# TIP
     0. 软件需要在mini-cheetah的up-board环境中运行
     1. "third_party"   文件夹: 第三方的原文件和头文件
     2. "robot"         文件夹: 与机器人底层有关的代码
