@@ -1,0 +1,462 @@
+
+更新日志:
+    20201215:
+             create source files "up_serial";
+             get one byte data from at9s in up board, tested OK.
+    20201220:
+             create source files "up_at9s";
+             get all command from at9s, tested OK.
+    20201220:
+             change structure of this project, tested OK;
+             add guide in the top of this file.
+    20201221:
+             modify class up_serial and up_at9s, tested OK;
+             add construct function to init variables, tested OK;
+             add class up_spi and joint_driver, not test.
+    20201222:
+             modify class up_spi and joint_driver, not test;
+             add guides to up_serial.h, up_at9s.h, up_spi.h, joint_driver.h.
+    20201223:
+             modify class up_at9s and joint_driver, init variables to zero;
+             change executable file's name to "[user program name].sun";
+             change "loading.sh" file, loading command has changed, see guide 3;
+             add "leg_test" program to test class "joint_driver", tested OK.
+    20201226:
+             test leg0's movement, from current position to rest-position, failed;
+             knee's zero position is changed.
+    20201227:
+             test all legs, hold it's current posion, OK;
+             knee's zero position of every legs are still wrong.
+    20201228:
+             add "common" folder and it's files, add "third-party" folder;
+             add "lord_imu" folder and it's files to drive 3DM IMU of robot;
+             test IMU by running "lord_test" in "third-party/lord_imu/test", tested OK.
+    20201231:
+             transfer "common" folder's files to "third-party" folder;
+             add "sys_test" which test all functions of this project;
+             set knee's zero position by modify offset of knee's position;
+             control knee by at9s, tested OK.
+    20210101:
+             test all joints, OK.
+    20210102:
+             change structure of this project, simplify cmake files;
+             all function tested OK.
+    20210103:
+             add "task_test" project, tested OK;
+             add "signal" function about "ctr+C" to every test project.
+    20210104:
+             modify signal function, close program by a flag from signal function;
+             add class: robot_console, and use it in sys_test program;
+             optimize up_spi's "send_receive" function, repair "stack smashing" bug.
+    20210105:
+             set initial value of at9s.cmd in robot_console.
+    20210109:
+             improve annotation of all sources and head files.
+    20210111:
+             create parent class: robot_controller, in ./robot;
+             create controller: joint_controller, in ./user, which replace "sys_test";
+             delete "sys_test" folder and it's files;
+             modify class: robot_console, for fitting external controllers;
+             watting for test.
+    20210112:
+             debug and test joint_controller, OK;
+             add initial posion of legs in joint_controller, tested OK.
+    20210118:
+             delete "leg_test" in "user/test";
+             create "leg_driver" in "robot".
+    20210119:
+             modify "robot_console" and "robot_controller" to fit "leg_driver";
+             change driver of "joint_controller", from "joint_driver" to "leg_driver";
+             new "joint_controller" tested OK;
+             joint driver part of "leg_driver" tested OK.
+    20210120:
+             creating "leg_controller", not finished.
+    20210121:
+             creating "leg_controller", not finished;
+             "leg_controller" finished;
+             test set-mode function, OK;
+             test initial joint-position mode, all knee's zero position changed;
+             set all knee's zero position, completed;
+             all joint's zero postion is good;
+             test initial-joint-position mode of leg 0, OK;
+             change initial-joint-position mode to initial-foot-position mode;
+             test initial-foot-position mode, OK;
+             test stand-up mode, stand_down mode and balance mode(fake), motion is OK;
+             test all mode whith different parameters, go wrong at last time;
+             test again whith old parameter, still go wrong, no useful data found.
+    20210122:
+             change initial initial_target_jpos, initial_target_fpos and stand_target_fpos;
+             change mode's PD patameter, same with MIT/YOBOTR code;
+             change period of robot-controller task, from 0.001 to 0.002;
+             add run_tau_estimate function in "leg_driver", estimate output torque based on current command;
+             create "fpos_cmd_check" function, completed;
+             creating "mtau_cmd_check" function, not completed.
+    20210123:
+             complete "mtau_cmd_check";
+             create "fpos_state_check" function, completed;
+             create "jpos_state_check" function, completed;
+             create "fv_state_check" function, completed;
+             create "jv_state_check" function, completed;
+             create "tau_state_check" function, completed;
+             add "estop" mode;
+             modify "leg_controller" to fit "safety_check";
+             completed "safety_check".
+    20210124:
+             test code in robot, "safety_check" is working;
+             robot error happened, it seems caused by random receive data error.
+    20210216:
+             create lcm_test, not work.
+    20210217:
+             modofy lcm_test, add parameter("udpm://239.255.76.67:7667?ttl=255") when create lcm object(lcm::LCM lcm);
+             test OK.
+    20210312:
+             add spi_data in robot_console, which connect leg_driver and joint_driver.
+    20210314:
+             在up_serial.h中，通过宏定义termios避免与lordIMU中的同名变量重复。
+             增加线程锁测试：mutex_test, 测试通过。
+             robot_console中 增加遥控器数据，用于连通 robot_controller 和遥控器驱动
+             robot_console中 设置线程锁，包括：关节数据、关节指令、遥控器指令
+             测试leg_controller,依旧有问题，第3腿x方向速度偶尔过大
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    20210327: 版本大更新！
+              0. 这段时间重装了PC端系统，安装了中文输入法。将程序和结构进行了优化，注释改成了中文；
+                 重写了leg_controller；将readme中的update log单独放到一个文件，指南改成中文。
+              1. 原版本leg_controller失控的问题已解决，该机器人不适合在上层使用足端位置的PD控制。
+                 该机器人的电机控制频率非常高，其底层采用位置PD+前馈力矩的控制方式，
+                 上层采用足端位置的PD控制方式时，发往底层的数据只有前馈力矩，由于底层控制频率大于上层，
+                 在上层的一个控制周期中，底层一直按照上次的前馈力矩值控制电机，极有可能导致电机瞬时速度过大。
+                 该异常速度反馈到上层时，由于控制频率的限制，容易发生震荡从而导致电机失控。
+                 因此需要放弃在上层使用足端位置的PD控制，改成直接在上层控制关节位置，由电机的底层控制器进行位置PD控制。
+              2. 主要变化如下（变化较多，列出的可能不全）：
+                 0. 在robot_console和leg_driver中定义关节状态和指令数据变量，
+                    使用线程锁进行joint_driver与robot_console的数据交换、robot_console与leg_driver的数据交换。
+                 1. 与0类似，robot_console中定义遥控器的公共数据，使用线程锁进行up_at9s和robot_controller之间的遥控器数据交换。
+                 2. robot文件夹中新建robot.h和robot.cpp，用于存储机器人的参数和定义机器人运动学功能函数等。
+                 3. 将leg_driver中的机器人限位、关节长度等机器人参数转移到robot.h。
+                 4. 删除leg_driver中的足端位置PD控制，将雅克比矩阵和正运动学的计算放到robot.cpp中。
+                 5. 简化leg_driver中腿状态和指令变量结构体成员变量的名称，删除足端PD控制相关的指令，状态数据中增加足端位置、速度、力。
+                 6. 将leg_controller中模式设定和控制模式的运行打包成一个类；将安全检查打包成一个类，分为状态检查和指令检查两个部分。
+                 7. 将控制模式中的init_joint_mode改为fole_mode
+                 8. 更改各控制模式的执行函数，stand_up_mode和stand_down_mode中的足端PD控制都改为关节位置控制
+                 9. 删除balance_mode和 locomotion_mode的执行函数，后续创建单独的类来执行该部分功能
+              3. 上述更改测试：系统可正常运行；
+                             fole_mode、stand_up_mode、stand_down_mode可正常运行，
+                             多次实验站立和下蹲动作，无失控等意外情况发生，可喜可贺！！！！！！(20210327,23:13)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    20210401: 增加状态机身估计功能
+              0. 新建body_state_estimator类，用于进行机身姿态、角速度、位置、速度等状态数据的估计
+              1. 在robot_console中加入IMU驱动，单独使用一个线程获取IMU数据，并用线程锁控制数据交流
+              2. 在robot_console中添加body_state_estimator对象，添加初始化操作，连接需要的数据
+              3. 在robot_console主控制器线程中加入机身状态估计（body_state_estimator），及其数据更新
+              4. 在robot_controller基类中新建机身状态估计数据指针，指向机身状态估计数据（robot_console初始化时设置）
+              5. 以上变更编译通过。未测试
+
+    20210402: 
+              0. 简单测试状态估计，机器人还不能运动，只测试了机器人站立，下蹲时的身体状态变化
+
+    20210406: 
+              0. robot中加入运动学逆解计算
+              1. 增加轨迹规划类：trajectory_plan
+              2. 修改关于平衡模式和运动模式的模式设置代码
+              3. 补充平衡模式和运动模式的控制代码
+              4. 在robot.h中统一规定控制周期dt
+              5. robot.h中增加运动模式下的足端位置限制，J_FK函数中增加空指针检查
+              6. 完善平衡模式和运动模式的安全检查代码
+              7. 编译OK，待实物测试
+
+    20210407: 
+              0. 平衡模式和运动模式实物测试，测试过程中微调部分参数，测试OK
+
+    20210410: 
+              0. 在robot文件夹中增加贝塞尔曲线插补源文件和头文件
+
+    20210411: 
+              0. 将body_state_estimator.h中的hip_location转移到robot.h中
+              1. mode_controller中增加机身状态估计数据
+              2. 在leg_controller文件夹中增加balance_stand_controller源文件和头文件，
+                 用于控制机器人站立状态下的平衡控制。
+                 预计包含绝对期望位姿控制和带有姿态反馈的动态期望位姿控制。
+                 已完成绝对期望位姿控制代码，未测试！
+
+    20210412: 
+              0. balance_stand_controller中采用世界坐标系下解算足端位置的方式存在机身欧拉角与
+                 世界坐标系欧拉角不一致的情况，且公式比较复杂，故改为机身坐标系下解算的方式
+              1. safety_check中启动全模式下的指令力矩检查，防止两个控制周期发送的指令出现突变的情况
+                 力矩上限改为极限力矩值，状态检查的力矩检查依旧不开启。
+                 增加全指令模式下的关节物理极限位置指令检查
+                 balance模式的状态检查和指令检查改为与运动模式一致
+                 增加全指令模式下的机身方位状态检查
+              2. 初步测试balance_stand_controller，小角度范围下的动作没问题，
+                 遥控器指令太灵敏，后面把滤波值改的更小一点
+                 后面需要离线测试可运动的角度和位置范围
+
+    20210413: 
+              0. balance_stand_controller完善为两种模式：
+                   0. 姿态反馈模式，该模式下关闭遥控器指令，姿态反馈包括滚转角和俯仰角
+                   1. 遥控器指令模式，该模式下关闭姿态反馈，该模式下每次仅可调节一各量，否则可能算不出逆解
+                 将以上两种模式的控制量统一进行控制，总控制量使用低通滤波，防止震荡
+              1. 遥控器控制姿态测试没有问题
+              2. 姿态反馈的姿态误差应当为一个累计值，采用了积分控制，测试时似乎有震荡，考虑增加PD控制
+    
+    20210414: 
+              0. 完善balance_stand_controller,姿态反馈采用PID控制，
+                 测试没问题，但是效果不明显，可能参数调的不好，暂时搁置这个问题！！
+              1. 创建gait_plan和locomotion_controller头文件和源文件，开始准备做运动控制
+                 上述两个文件均未完成，未备份今日更新
+
+    20210415: 
+              0. 完成gait_plan
+              1. 重写trajectory_plan头文件和源文件，删除原来固定轨迹的轨迹规划方案
+                 利用贝塞尔曲线插值法，采用两点之间插值的方式规划轨迹
+                 已完成
+              2. locomotion_controller增加一些功能，但是未完成
+              3. 今日未做测试
+
+    20210419: 
+              0. gait_plan run函数代码优化，增加支撑状态数据计算
+                 增加init()函数，每次重新进入该步态模式时运行一次
+              1. locomotion_controller中增加状态估计的接触状态数据更新功能
+              2. 修改mode_controller, 加入locomotion控制，删除原有的运动控制参数变量
+                 删除原有的轨迹规划代码
+              3. trajectory_plan有bug，已修复，还需进一步调试
+              4. 运动实验失败，原因未知，已录视频
+
+    20210420: 
+              0. 修改locomotion_controller中部分代码以排查错误，
+                 今日未解决昨日问题
+
+    20210421: 
+              0. 找到错误原因，gait_plan中的t_swing计算错误，
+                  应该是t_swing[leg] = t_offset - T_stance[leg]
+                  写成了t_swing[leg] = t_offset - t_stance[leg]
+                  造成了第一个周期计算的t_swing值过大，导致插值计算的位置出错
+              1. 运动控制相关代码变动了很多地方
+              2. 测试运动控制OK，但是运动效果很差，稳定性不好，有待改进
+
+    20210422: 
+              0. 落足点规划加入中性点，实验效果依旧不理想
+
+    20210429: 
+              0. 增加运动控制轨迹的基准位置偏置，用来调整重心
+              1. 实验发现失控，机器人向某一方向不受控制的运动，
+                 取消新加的重心偏置后依旧存在该问题，估计速度反馈的调节方向反了。
+                 检查反馈没有问题，支撑相的运动是机身速度的来源，支撑相根据机身速度选择落足点可能不对
+              2. 改为在支撑相期望速度控制，摆动相机身速度控制，效果依旧不好
+              3. 改为支撑相摆动相全部机身速度控制，调节重心，重心调节有效果，但是运动效果依旧不好
+
+    20210509: 
+              0. robot.h文件中腿的基坐标系相对于机身坐标系的位置写错了
+                 y值忘记除以2了，已经从0.1改为0.05
+
+    20210512: 
+              0. 运动控制取消速度反馈，采用固定轨迹
+              1. 修改步态周期和占空比测试，分别，1-0.5，0.8-0.8，1-0.7,1-0.8
+                 效果依旧不好
+
+    20210601: 该次更新为累积更新
+              0. leg_driver 增加关节角加速度计算，用速度微分
+              1. body_state_estimator 增加机身角加速度计算，用机身角速度微分
+              2. 创建robot_model，用于创建四足机器人运动树模型和各部件惯量参数
+              3. 创建fb_dynamic，用于计算四足机器人动力学表达式，可进行正逆动力学运算
+              4. leg_controller中创建robot_model和fb_dynamic类，用于计算足端接触力
+              5. 足端接触力计算实验，静止站立时足端接触力偏小，可能与关节力矩估计值偏小有关
+              6. 足端接触力实验，计算结果噪声较大，与速度、加速度、关节驱动力矩等参数噪声有关
+
+    20210730: 增加MPC，未完成
+              0. leg_controller 增加MPC文件夹，用于计算MPC，为移植来的代码，正在修改以适应
+                 本工程，未完成。
+
+    20210804: 移植MPC
+              0. 修改mpc文件夹工程文件，工程文件配置完成
+
+    20210805: MPC
+              0. gait_plan新增函数run_mpc_stance_flag()和变量用于计算mpctable，用于mpc
+                 即预测每个步长的足端接触状态，mpc_stance_flag
+              1. locomotion_controller新增函数run_MPC()用于计算足端力
+              2. locomotion_controller增加使用run_mpc_stance_flag()的代码
+
+    20210807: MPC
+              0. locomotion_controller新增计算mpc参考轨迹的代码，与MIT相比有较多修改
+
+    20210809: MPC
+              0. locomotion_controller新增计算mpc参数的代码，参数的选用参考自MIT
+
+    20210811: MPC
+              0. locomotion_controller的run_MPC()函数完成，并在运动控制函数中调用，
+                 每经过一个dtmpc时间调用一次，每次得到一组足端力数据，用于支撑相的力控制
+              1. 注意：mpc求解代码已经完成，可以通过编译，但是没有经过实物测试，
+                 运动控制部分代码还是之前的，未使用力控。
+
+    20210927: MPC
+              0. 修改运动控制方式为力控，改动：locomotion_controller，mode_controller
+                 摆动相：位置控制，落足点选择使用中性点
+                 支撑相：力控制+关节阻尼控制
+
+    20210928: 
+              0. safety_check-locomotion_cmd_check(),增加进入条件-当前腿启动位置控制
+              1. gait_plan::run()，周期重载条件 if(t > T)改为if(t >= T)
+
+    20210929: 
+              0. locomotion_controller中计算MPC的预测接触状态的时间变量修正
+
+    20211001: 升级前存档
+              0. 力控制实验出现问题，原因不好排查，准备升级系统，使用统一的数据类存储所有数据
+                 控制器所有的模块都可以访问，方便查看数据，排查问题
+
+    20211002: 系统升级，但是不使用统一的数据类，改为在leg_controller中保存所有数据
+              0. mode_controller.h中模式对象改为公有，方便保存
+              1. locomotion_controller.h中gait_plan对象改为公有，方便保存
+                 MPC计算的足端力结果f_ff[4]改为公有，方便保存
+                 增加变量保存摆动轨迹参数
+                 机身期望状态变量改为公有，方便保存
+              2. safety_check增加检查错误代码变量，用于保存数据
+              3. leg_controller创建FILE* data_file，用于在init()中打开文件
+              4. leg_controller创建公有成员函数编写run_data_write()，
+                 将数据保存到文件robot_tata.txt中
+              5. 编写下载数据脚本，执行后可以将数据从机器人复制到PC
+
+    20211003: 
+              0. 更改数据保存频率
+              1. 支撑相加入位置控制，准备在支撑相采用位置/力混合控制
+
+    20211004: 
+              0. 在robot_console中增加prefaultStack()和setupScheduler()
+                 具体作用未知
+              1. MPC执行耗时太长，估计一个步态周期执行10次需要1.4s，
+                 准备使用另一个版本的MPC代码
+
+    20211005: 
+              0. 已使用新版求解库，离线测试一个步态周期0.2s，可以接受
+              1. 增加运行时间数据的保存
+              2. 增加保存MPC计算的足端力对应的关节力矩
+              3. 实验失败，机器人姿态不稳，MPC不调节，可能权重参数没调好
+                 考虑增加姿态比重
+
+    20211006: 
+              0. 多次调整MPC参数，实验失败
+              1. 发现MPC执行时间间隔太长，以控制周期dt作为基本时间单位不合理，
+                 考虑修改步态规划，以及其他涉及到控制周期的部分
+              2. 升级gait_plan，增加最小执行时间单位dt_gait，修改对应功能代码
+              3. 升级完成，测试没有问题，力控实验失败
+              4. 发现MPC设置轨迹处代码出错，初始轨迹被错误修改，已经修复
+              5. 修复后实验依旧失败
+
+    20211007: 发现大bug
+              0. 运动模式取消力矩指令检查
+              1. 减小运动模式摆动相的位置控制PD系数
+              2. 增大运动模式支撑相的位置控制PD系数
+              3. 增大收腿/站立等模式的位置控制PD系数
+              4. MPC最大力参数-80
+              5. MPC初始轨迹改为当前机器人状态，后续轨迹依旧为期望状态
+              6. 发现大bug，足端位置r矩阵的排序不对
+              7. 修复上述bug
+              8. 多次实验和调整参数，实验成功
+                 MPC参数还要再调一调
+
+    20211008: 
+              0. MPC初始轨迹改回期望机器人状态
+              1. MPC支撑状态的第一步预测改为从当前支撑状态获取，
+                 后续步长利用函数计算
+              2. 步态周期改为0.5，期望机器人状态指令滤波系数0.3
+              3. 落足点速度比例控制系数改为0.5
+              4. 落足点速度比例控制系数改回0.1,0.09
+              5. 增大MPC位置权重
+              6. 复原MPC位置权重，落足点调整速度比例方向
+              7. 落足点使用mit原版
+
+    20211009: 
+              0. 修改落足点代码，新增机身的运动距离，
+              1. 期望机器人状态指令滤波系数0.03
+              2. 步态周期0.4
+              3. 角度权重5，速度z0.1
+              4. 增加旋转速度校正，调整0飘
+              5. 运动控制基本没有问题了
+              
+    20211012: 足端状态估计
+              0. gait_plan增加摆动状态数据
+              1. leg_controller增加打印足端力数据
+              2. 新建足端接触状态估计contact_detection
+              3. leg_controller增加contact_detection对象
+              4. locomotion_controller中取消状态估计中接触状态的更新
+                 改为在leg_controller中由足端接触状态数据更新
+              5. 代码已经写好，未测试
+
+    20211013: 
+              0. 状态估计中接触状态的更新改回locomotion_controller中
+              1. 遥控器指令最大步长改为最大速度
+              2. 保存接触概率估计数据，开始调试
+              3. 概率估计公式没问题，但是计算的力不对，误差太大
+
+    20211014: 
+              0. 升级动力学，增加转子动力学，效果不明显
+              1. 调整动力学参数，效果不好
+              2. 引入伪足端力，效果不好
+
+    20211015: 
+              0. 修改fb_dynamic，加入逆动力学，调整函数功能
+              1. 新动力学未测试
+
+    20211017: 
+              0. 修复robot_console::init_sum()中未返回值的bug
+                 该bug导致初始化失败
+              1. 发现新bug，leg_driver计算的加速度值不对，且不应该在这里计算，
+                 改为在joint_driver中计算
+              2. 计算的合力有问题
+
+    20211018: 
+              0. 保存关节加速度，看是否有问题
+
+    20211019: 
+              0. 关节速度滤波1
+              1. 调整摆动PD系数和支撑D系数
+    
+    20211022: 
+              0. 加速度滤波0.4
+              1. knee关节m*2,i*40
+              2. knee关节合力计算基本准确，其他两个关节不行
+
+    20211128: 
+              0. 发现bug，落足点规划剩余时间变量访问忘记加腿编号下标，
+                 修复后发现速度指令过小，因此适当增加速度指令最大值。
+              1. 发现bug，落足点规划旋转补偿y方向应该有-号，忘记加了，已修复
+              2. 增加力为混合控制，有效果
+              3. 调整MPC参数，稳定性增加
+
+    20211129: 
+              0. 编写力位混合控制实验代码
+
+    20211130: 
+              0. 编写触底概率检测实验代码
+              1. 轨迹插值方法暂时修改为线性插值
+              2. 轨迹插值方法已经修改为原来方法
+
+    20211201: 
+              0. 运动参数全部改为原来的值，进行足端触地状态估计实验
+
+    20211202: 
+              0. 设计基于实际触地状态的复杂地形运动控制方法
+                 足端触地状态估计contact_detection中加入阈值，计算触地标志
+                 运动控制locomotion_ctr中新增实际触地标志变量contact_flag
+                 leg_controller中将实际接触状态赋值给locomotion_ctr->contact_flag[leg]
+                 运动控制locomotion_ctr中新增基于实际触地状态的复杂地形控制策略
+                 运动控制locomotion_ctr中MPC的当前支撑状态改为基于实际触地状态的复杂地形控制策略
+                 运动控制locomotion_ctr中运动控制方式选择条件改为基于实际触地状态的复杂地形控制策略
+              1. 编写复杂地形实验数据保存代码
+              2. 实验室实验有效果，但是效果不明显
+
+    20211206: 
+              0. 设计规则路面进行基于实际触地状态的复杂地形运动控制实验
+
+    20220115: 
+              0. 在新机器人上面测试，取消test程序的编译
+
+    20220324: 
+              0. 完成代码对机器人2IMU的适应，根目录CMakeLists.txt中选择机器人的宏定义
+              1. 运动控制在机器人2上失控，可能是机器人电机控制器参数不同的问题，或者其他控制参数不同导致的
+
+    20220328: 
+              0. 调整机器人2控制参数，有效果，但是还要继续调整

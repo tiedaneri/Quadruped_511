@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../user/test/usb_test/../../../robot/include/up_usbDevice.h
+stdio.h
+-
+stdint.h
+-
+string
+-
+vector
+-
+termios.h
+-
+
+/home/tiedan/Desktop/robot_software_WBC/user/test/usb_test/usb_test.cpp
+up_usbDevice.h
+/home/tiedan/Desktop/robot_software_WBC/user/test/usb_test/up_usbDevice.h
+stdio.h
+-
+unistd.h
+-
+csignal
+-
+

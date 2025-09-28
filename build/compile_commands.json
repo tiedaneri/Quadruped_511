@@ -1,0 +1,327 @@
+[
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Dlinux -Dthird_party_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/include -I/home/tiedan/Desktop/robot_software_WBC/third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/third_party.dir/source/Utilities/PeriodicTask.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/source/Utilities/PeriodicTask.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/source/Utilities/PeriodicTask.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Dlinux -Dthird_party_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/include -I/home/tiedan/Desktop/robot_software_WBC/third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/third_party.dir/source/Utilities/Utilities_print.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/source/Utilities/Utilities_print.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/source/Utilities/Utilities_print.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party",
+  "command": "/usr/bin/x86_64-linux-gnu-gcc-5  -DONLYMPC -DROBOT1 -Dlinux -Dthird_party_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/include -I/home/tiedan/Desktop/robot_software_WBC/third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -o CMakeFiles/third_party.dir/source/lord_imu/Source/mip.c.o   -c /home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip.c",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip.c"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party",
+  "command": "/usr/bin/x86_64-linux-gnu-gcc-5  -DONLYMPC -DROBOT1 -Dlinux -Dthird_party_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/include -I/home/tiedan/Desktop/robot_software_WBC/third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -o CMakeFiles/third_party.dir/source/lord_imu/Source/mip_sdk_3dm.c.o   -c /home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_3dm.c",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_3dm.c"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party",
+  "command": "/usr/bin/x86_64-linux-gnu-gcc-5  -DONLYMPC -DROBOT1 -Dlinux -Dthird_party_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/include -I/home/tiedan/Desktop/robot_software_WBC/third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -o CMakeFiles/third_party.dir/source/lord_imu/Source/mip_sdk_ahrs.c.o   -c /home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_ahrs.c",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_ahrs.c"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party",
+  "command": "/usr/bin/x86_64-linux-gnu-gcc-5  -DONLYMPC -DROBOT1 -Dlinux -Dthird_party_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/include -I/home/tiedan/Desktop/robot_software_WBC/third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -o CMakeFiles/third_party.dir/source/lord_imu/Source/mip_sdk_base.c.o   -c /home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_base.c",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_base.c"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party",
+  "command": "/usr/bin/x86_64-linux-gnu-gcc-5  -DONLYMPC -DROBOT1 -Dlinux -Dthird_party_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/include -I/home/tiedan/Desktop/robot_software_WBC/third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -o CMakeFiles/third_party.dir/source/lord_imu/Source/mip_sdk_filter.c.o   -c /home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_filter.c",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_filter.c"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party",
+  "command": "/usr/bin/x86_64-linux-gnu-gcc-5  -DONLYMPC -DROBOT1 -Dlinux -Dthird_party_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/include -I/home/tiedan/Desktop/robot_software_WBC/third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -o CMakeFiles/third_party.dir/source/lord_imu/Source/mip_sdk_gps.c.o   -c /home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_gps.c",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_gps.c"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party",
+  "command": "/usr/bin/x86_64-linux-gnu-gcc-5  -DONLYMPC -DROBOT1 -Dlinux -Dthird_party_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/include -I/home/tiedan/Desktop/robot_software_WBC/third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -o CMakeFiles/third_party.dir/source/lord_imu/Source/mip_sdk_inteface.c.o   -c /home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_inteface.c",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_inteface.c"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party",
+  "command": "/usr/bin/x86_64-linux-gnu-gcc-5  -DONLYMPC -DROBOT1 -Dlinux -Dthird_party_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/include -I/home/tiedan/Desktop/robot_software_WBC/third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -o CMakeFiles/third_party.dir/source/lord_imu/Source/mip_sdk_system.c.o   -c /home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_system.c",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_system.c"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party",
+  "command": "/usr/bin/x86_64-linux-gnu-gcc-5  -DONLYMPC -DROBOT1 -Dlinux -Dthird_party_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/include -I/home/tiedan/Desktop/robot_software_WBC/third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -o CMakeFiles/third_party.dir/source/lord_imu/Source/ring_buffer.c.o   -c /home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/ring_buffer.c",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/ring_buffer.c"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party",
+  "command": "/usr/bin/x86_64-linux-gnu-gcc-5  -DONLYMPC -DROBOT1 -Dlinux -Dthird_party_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/include -I/home/tiedan/Desktop/robot_software_WBC/third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -o CMakeFiles/third_party.dir/source/lord_imu/Source/mip_sdk_user_functions.c.o   -c /home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_user_functions.c",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/mip_sdk_user_functions.c"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party",
+  "command": "/usr/bin/x86_64-linux-gnu-gcc-5  -DONLYMPC -DROBOT1 -Dlinux -Dthird_party_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/include -I/home/tiedan/Desktop/robot_software_WBC/third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -o CMakeFiles/third_party.dir/source/lord_imu/Source/byteswap_utilities.c.o   -c /home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/byteswap_utilities.c",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/Source/byteswap_utilities.c"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Dlinux -Dthird_party_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/include -I/home/tiedan/Desktop/robot_software_WBC/third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/third_party.dir/source/lord_imu/LordImu.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/LordImu.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/source/lord_imu/LordImu.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/Constraints.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/Constraints.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/Constraints.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/Matrices.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/Matrices.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/Matrices.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/Utils.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/Utils.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/Utils.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/Bounds.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/Bounds.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/Bounds.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/Indexlist.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/Indexlist.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/Indexlist.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/OQPinterface.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/OQPinterface.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/OQPinterface.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/QProblem.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/QProblem.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/QProblem.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/Flipper.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/Flipper.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/Flipper.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/MessageHandling.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/MessageHandling.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/MessageHandling.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/SolutionAnalysis.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/SolutionAnalysis.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/SolutionAnalysis.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/BLASReplacement.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/BLASReplacement.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/BLASReplacement.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/SparseSolver.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/SparseSolver.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/SparseSolver.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/SubjectTo.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/SubjectTo.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/SubjectTo.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/QProblemB.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/QProblemB.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/QProblemB.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/SQProblem.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/SQProblem.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/SQProblem.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/LAPACKReplacement.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/LAPACKReplacement.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/LAPACKReplacement.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/Options.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/Options.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/Options.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/qpOASES",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -DqpOASES_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/include  -O3 -no-pie -ggdb -w -D__NO_COPYRIGHT__ -Wno-error -Wall -pedantic -Wfloat-equal -Wshadow -DLINUX -g -O3 -finline-functions -fPIC   -std=gnu++14 -o CMakeFiles/qpOASES.dir/src/SQProblemSchur.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/SQProblemSchur.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/qpOASES/src/SQProblemSchur.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/Goldfarb_Optimizer",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DGoldfarb_Optimizer_EXPORTS -DONLYMPC -DROBOT1  -O3 -no-pie -ggdb  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/Goldfarb_Optimizer.dir/QuadProg++.cc.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/Goldfarb_Optimizer/QuadProg++.cc",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/Goldfarb_Optimizer/QuadProg++.cc"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/third_party/Goldfarb_Optimizer",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DGoldfarb_Optimizer_EXPORTS -DONLYMPC -DROBOT1  -O3 -no-pie -ggdb  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/Goldfarb_Optimizer.dir/Array.cc.o -c /home/tiedan/Desktop/robot_software_WBC/third_party/Goldfarb_Optimizer/Array.cc",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/third_party/Goldfarb_Optimizer/Array.cc"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/robot",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Drobot_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/robot/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/robot.dir/source/up_usbDevice.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/robot/source/up_usbDevice.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/robot/source/up_usbDevice.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/robot",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Drobot_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/robot/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/robot.dir/source/up_serial.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/robot/source/up_serial.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/robot/source/up_serial.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/robot",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Drobot_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/robot/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/robot.dir/source/up_at9s.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/robot/source/up_at9s.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/robot/source/up_at9s.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/robot",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Drobot_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/robot/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/robot.dir/source/up_spi.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/robot/source/up_spi.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/robot/source/up_spi.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/robot",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Drobot_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/robot/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/robot.dir/source/joint_driver.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/robot/source/joint_driver.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/robot/source/joint_driver.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/robot",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Drobot_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/robot/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/robot.dir/source/robot_console.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/robot/source/robot_console.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/robot/source/robot_console.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/robot",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Drobot_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/robot/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/robot.dir/source/leg_driver.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/robot/source/leg_driver.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/robot/source/leg_driver.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/robot",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Drobot_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/robot/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/robot.dir/source/robot.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/robot/source/robot.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/robot/source/robot.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/robot",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Drobot_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/robot/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/robot.dir/source/body_state_estimator.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/robot/source/body_state_estimator.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/robot/source/body_state_estimator.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/robot",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Drobot_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/robot/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/robot.dir/source/bezier_interpolation.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/robot/source/bezier_interpolation.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/robot/source/bezier_interpolation.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/robot",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Drobot_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/robot/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/robot.dir/source/robot_model.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/robot/source/robot_model.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/robot/source/robot_model.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/robot",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Drobot_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/robot/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/robot.dir/source/fb_dynamic.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/robot/source/fb_dynamic.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/robot/source/fb_dynamic.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/robot",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Drobot_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/robot/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/robot.dir/source/vector_tools.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/robot/source/vector_tools.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/robot/source/vector_tools.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/robot",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -Drobot_EXPORTS -I/home/tiedan/Desktop/robot_software_WBC/robot/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/robot/../third_party/include/lord_imu/Include  -O3 -DNDEBUG -fPIC   -std=gnu++14 -o CMakeFiles/robot.dir/source/contact_detection.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/robot/source/contact_detection.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/robot/source/contact_detection.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/main.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/main.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/main.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/leg_controller.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/leg_controller.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/leg_controller.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/source/mode_controller.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/source/mode_controller.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/source/mode_controller.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/source/safety_check.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/source/safety_check.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/source/safety_check.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/source/trajectory_plan.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/source/trajectory_plan.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/source/trajectory_plan.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/source/balance_stand_controller.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/source/balance_stand_controller.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/source/balance_stand_controller.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/source/locomotion_controller.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/source/locomotion_controller.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/source/locomotion_controller.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/source/gait_plan.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/source/gait_plan.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/source/gait_plan.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/convexMPC/convexMPC_interface.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/convexMPC/convexMPC_interface.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/convexMPC/convexMPC_interface.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/convexMPC/SolverMPC.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/convexMPC/SolverMPC.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/convexMPC/SolverMPC.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/convexMPC/RobotState.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/convexMPC/RobotState.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/convexMPC/RobotState.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/WBC_Ctrl/WBC_Ctrl.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/WBC_Ctrl/WBC_Ctrl.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/WBC_Ctrl/WBC_Ctrl.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/WBC_Ctrl/LocomotionCtrl.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/WBC_Ctrl/LocomotionCtrl.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/WBC_Ctrl/LocomotionCtrl.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/WBC_Ctrl/TaskSet/BodyOriTask.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/WBC_Ctrl/TaskSet/BodyOriTask.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/WBC_Ctrl/TaskSet/BodyOriTask.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/WBC_Ctrl/TaskSet/BodyPosTask.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/WBC_Ctrl/TaskSet/BodyPosTask.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/WBC_Ctrl/TaskSet/BodyPosTask.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/WBC_Ctrl/TaskSet/LinkPosTask.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/WBC_Ctrl/TaskSet/LinkPosTask.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/WBC_Ctrl/TaskSet/LinkPosTask.cpp"
+},
+{
+  "directory": "/home/tiedan/Desktop/robot_software_WBC/build/user/leg_controller",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-5   -DONLYMPC -DROBOT1 -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/. -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./convexMPC -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/ContactSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/./WBC_Ctrl/TaskSet -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../robot/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/include/lord_imu/Include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/qpOASES/include -I/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/../../third_party/Goldfarb_Optimizer -I/usr/local/include/eigen3  -O3 -DNDEBUG   -std=gnu++14 -o CMakeFiles/leg_controller.dir/WBC_Ctrl/ContactSet/SingleContact.cpp.o -c /home/tiedan/Desktop/robot_software_WBC/user/leg_controller/WBC_Ctrl/ContactSet/SingleContact.cpp",
+  "file": "/home/tiedan/Desktop/robot_software_WBC/user/leg_controller/WBC_Ctrl/ContactSet/SingleContact.cpp"
+}
+]
