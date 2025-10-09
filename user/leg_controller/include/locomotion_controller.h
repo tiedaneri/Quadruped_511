@@ -20,6 +20,7 @@
 #include "up_at9s.h"             //遥控器驱动
 #include "leg_driver.h"          //腿驱动
 #include "body_state_estimator.h"//机身状态估计
+#include "up_usbDevice.h"   //传感器采集板(USB)驱动
 #include "fb_dynamic.h"     //动力学计算
 #include "gait_plan.h"      //步态规划
 #include "trajectory_plan.h"//轨迹规划
@@ -37,7 +38,7 @@ class locomotion_controller
     //在类中定义Eigen变量时要加入下面这句用于数据对齐
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     
-    locomotion_controller(at9s_cmd* _rc_cmd, leg_driver* _leg_drv, body_state_estimator_data* _body_data, fb_dynamic* _dynamic);
+    locomotion_controller(at9s_cmd* _rc_cmd, leg_driver* _leg_drv, body_state_estimator_data* _body_data, fb_dynamic* _dynamic, usb_device_data* _usb_data);
 
     void init(void);
     void run(void);
@@ -72,6 +73,8 @@ class locomotion_controller
     leg_driver* leg_drv;
     //变量，存储估计的身体状态结果
     body_state_estimator_data* body_data;
+    //USB设备数据指针，指针存储传感器采集板数据的对象
+    usb_device_data* usb_data;
     
     fb_dynamic* dynamic;
 

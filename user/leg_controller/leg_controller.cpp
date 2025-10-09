@@ -47,7 +47,7 @@ void leg_controller::init()
     dynamic = new fb_dynamic(&model, leg_drv->state, body_data);
     dynamic->init();//初始化动力学
     //创建模式控制对象，并传递对象参数
-    mode_ctr = new mode_controller(&rc_cmd, leg_drv, body_data, dynamic);
+    mode_ctr = new mode_controller(&rc_cmd, leg_drv, body_data, dynamic, &usb_data);
     mode_ctr->init();//初始化模式控制器
     //创建安全检查对象，并传递对象参数
     safty_ck = new safety_check(leg_drv, &rc_cmd, mode_ctr, body_data);
@@ -103,7 +103,7 @@ void leg_controller::run_controller()
     mode_ctr->run_mode();//运行设定模式
     safty_ck->run_cmd_check();//运行指令检查
 
-    run_data_write();//执行将各种数据写到文件中
+    // run_data_write();//执行将各种数据写到文件中--（终端/文件打印数据开关）
 
     real_t += robot::dt; //更新实时时间
 

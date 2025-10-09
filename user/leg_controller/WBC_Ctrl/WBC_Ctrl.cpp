@@ -24,6 +24,16 @@ WBC_Ctrl<T>::WBC_Ctrl(fb_dynamic* dynamic, body_state_estimator_data* body_data,
     _iter = 0;
     _full_config.setZero(); // 19行Vec
 
+    // 添加这些初始化
+    // fbm_state.q.resize(12);
+    // fbm_state.qd.resize(12);
+    // fbm_state.p.resize(12);
+    // fbm_state.v.resize(12);
+    // fbm_state.q.setZero();
+    // fbm_state.qd.setZero();
+    // fbm_state.p.setZero();
+    // fbm_state.v.setZero();
+
     _dynamic = dynamic;     //连接动力学计算
     _body_data = body_data; //连接状态估计器数据结构体
     _l_state = leg_state;     //连接腿数据结构体

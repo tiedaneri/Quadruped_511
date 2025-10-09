@@ -100,7 +100,7 @@ class robot_console
     joint_torque_estimate joint_torque;
     
     //USB设备数据，用于线程间交换
-    usb_device_data usb_data;     
+    usb_device_data usb_data;
     //遥控器指令数据，用于线程间数据交换
     at9s_cmd rc_cmd;
 

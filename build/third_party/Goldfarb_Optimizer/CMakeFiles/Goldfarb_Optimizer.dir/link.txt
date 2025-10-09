@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC -O3 -no-pie -ggdb  -O3 -DNDEBUG  -shared -Wl,-soname,libGoldfarb_Optimizer.so -o libGoldfarb_Optimizer.so CMakeFiles/Goldfarb_Optimizer.dir/Array.cc.o CMakeFiles/Goldfarb_Optimizer.dir/QuadProg++.cc.o 

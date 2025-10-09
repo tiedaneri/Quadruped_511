@@ -6,6 +6,7 @@
 
 ```bash
 0. 在根目录CMakeLists.txt选择机器人的宏定义
+    可选1号机从机/遥控器模式，或者2号机遥控器模式。
 1. 在PC端的"robot_software/build"文件夹中打开终端
 2. 编译该工程。在终端中执行以下指令：
     {cmake -DCMAKE_BUILD_TYPE=Release ..} # 用于设置为Release模式进行编译
@@ -21,7 +22,6 @@
 7. 结束程序指令按键：
     {Ctrl + C}
 ```
-
 
 # TIP
 

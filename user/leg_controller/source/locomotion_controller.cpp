@@ -21,11 +21,12 @@
  * @param {无}
  * @return {无}
  */
-locomotion_controller::locomotion_controller(at9s_cmd* _rc_cmd, leg_driver* _leg_drv, body_state_estimator_data* _body_data, fb_dynamic* _dynamic)
+locomotion_controller::locomotion_controller(at9s_cmd* _rc_cmd, leg_driver* _leg_drv, body_state_estimator_data* _body_data, fb_dynamic* _dynamic, usb_device_data* _usb_data)
 {
     rc_cmd    = _rc_cmd;   //连接遥控器指令
     leg_drv   = _leg_drv;  //连接腿驱动
     body_data = _body_data;//连接机身状态数据
+    usb_data = _usb_data;  //连接USB设备数据
     dynamic = _dynamic;    //连接浮基动力学
 
 #ifdef WBCANDMPC
@@ -411,6 +412,7 @@ void locomotion_controller::run()
         body_data->contact_state(leg) = trot_gait.stance_state[leg];
     }
     
+#ifndef FROBOT1 //只要不是1做从机（包含直接遥控1和2的情况），便使用遥控器数据
     //遥控器期望前后方向速度指令
     //遥控器期望左右方向速度指令
     //遥控器期望偏航角速度指令
@@ -419,7 +421,28 @@ void locomotion_controller::run()
     float vy_rc   = rc_cmd->LRO * vy_max;
     float vyaw_rc = rc_cmd->RRO * vyaw_max + vyaw_correct;
     float hf_rc   = rc_cmd->VB  * hight_max;
+#endif
+
+#ifdef FROBOT1 //只要1做从机，将指令替换为从以下策略获得
+    // 平行跟随策略
+    float vx_rc   = 0.f;
+    float vy_rc   = 0.f;
+    float vyaw_rc = rc_cmd->RRO * vyaw_max + vyaw_correct;
+    float hf_rc   = rc_cmd->VB  * hight_max;
+    if(1 == 1){
+        float vx_kp = 3.;
+        float vx_kd = 0.5;
         
+        float vx_adjustment = vx_kp * (usb_data->sdata[2] * M_PI / 180.0f) - vx_kd * body_data->v_body(0);
+        vx_rc += vx_adjustment;
+
+        const float max_vx = 0.6f;   // 限制最大前进速度
+        vx_rc = std::min(max_vx, vx_rc);
+        const float min_vx = 0.f;   // 限制最小前进速度
+        vx_rc = std::max(min_vx, vx_rc); 
+    }
+#endif
+    
     float filter = 0.03;//期望机器人状态指令滤波系数0.03，一阶低通滤波，滤波强响应慢
     vx_des   = vx_rc   * filter + vx_des   * (1 - filter);
     vy_des   = vy_rc   * filter + vy_des   * (1 - filter);

@@ -147,6 +147,9 @@ void robot_console::init_controller()
     robot_ctr->body_data = &body_se.body_data;//连接机身状态估计数据到控制器
     robot_ctr->leg_drv = &leg_drv;//连接腿驱动到控制器
     robot_ctr->init();//初始化控制器
+
+    // 将usb_data数据初始化为0
+    memset(&usb_data, 0, sizeof(usb_data));
 }
 
 /**
@@ -156,8 +159,10 @@ void robot_console::init_controller()
  */
 void robot_console::run_tasks()
 {
+#if defined(ROBOT1) && defined(FROBOT1)
     //创建传感器采集板(USB设备)任务
     PeriodicMemberFunction<robot_console> usb_device_task(&taskmanager, .004, "usb_device_task", &robot_console::run_usb_device, this);    
+#endif
     //创建遥控器任务
     PeriodicMemberFunction<robot_console> remote_task(&taskmanager, .005, "remote_task", &robot_console::run_remote, this);
     //创建imu任务
@@ -167,7 +172,9 @@ void robot_console::run_tasks()
     //创建控制器任务
     PeriodicMemberFunction<robot_console> robot_controller_task(&taskmanager, robot::dt, "robot_controller_task", &robot_console::run_robot_controller, this);
     
+#if defined(ROBOT1) && defined(FROBOT1)
     usb_device_task.start();      //启动传感器采集板(USB设备)任务
+#endif
     remote_task.start();          //启动遥控器任务
     imu_task.start();             //启动imu任务
     joint_drive_task.start();     //启动关节驱动任务
@@ -190,6 +197,7 @@ void robot_console::run_tasks()
  */
 void robot_console::run_usb_device()
 {
+#if defined(ROBOT1) && defined(FROBOT1)
     // 读取USB设备数据
     if(usb_dev.read_and_parse_data()) {
         usb_data_m.lock();           //USB数据线程锁，上锁
@@ -197,6 +205,7 @@ void robot_console::run_usb_device()
         memcpy(&usb_data, &usb_dev.data, sizeof(usb_device_data));
         usb_data_m.unlock();        //USB数据线程锁，解锁
     }
+#endif
 }
 
 /**

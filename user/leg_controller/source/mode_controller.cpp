@@ -16,11 +16,12 @@
  * @param {无}
  * @return {无}
  */
-mode_controller::mode_controller(at9s_cmd* _rc_cmd, leg_driver* _leg_drv, body_state_estimator_data* _body_data, fb_dynamic* _dynamic)
+mode_controller::mode_controller(at9s_cmd* _rc_cmd, leg_driver* _leg_drv, body_state_estimator_data* _body_data, fb_dynamic* _dynamic, usb_device_data* _usb_data)
 {
     rc_cmd = _rc_cmd;//连接遥控器指令
     leg_drv = _leg_drv;//连接腿驱动
     body_data = _body_data;//连接机身状态数据
+    usb_data = _usb_data;//连接usb设备数据
     dynamic = _dynamic;//连接浮基动力学
 
     mode = power_off;//设置初始模式为掉电模式
@@ -57,7 +58,7 @@ void mode_controller::init()
     //创建平衡站立控制对象
     balance_stand_ctr = new balance_stand_controller(rc_cmd, leg_drv, body_data);
     //创建运动控制对象
-    locomotion_ctr = new locomotion_controller(rc_cmd, leg_drv, body_data, dynamic);
+    locomotion_ctr = new locomotion_controller(rc_cmd, leg_drv, body_data, dynamic, usb_data);
     
     //设置初始遥控器指令
     rc_cmd->SWA = UP;
