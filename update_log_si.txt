@@ -549,5 +549,9 @@
             1）机器人1做从机，需增加USB底层驱动，于robot_console中开新的线程启动；
                在console中将usb_data初始化为0，不删了留下来，就不用ifdef那么多了，数据传是正常传，但是不做从机的时候传进去都是0且不用；
                已传进locomotionCtrl中，locomotionCtrl中使用条件编译指令替换指令获得（已注释）。
-               **需编译实验。** ！可正常编译！
+               **需编译实验。** ！可正常编译！！！但在机器人上运行时报错。
+               (问题涉及win和linux的底层文件系统链接问题，不详细解决，采用linux上拷贝副本编译的方案)
+               
+               win上仓库通过共享文件夹与虚拟机ubuntu共享仓库，ubuntu共享路径为 /mnt/hgfs/Quadruped_511，编译位置位于 /home/tiedan/Quadruped_511_compile，\
+               编译位置下存有命令行脚本copy.sh，运行其可直接删除-拷贝-构建-编译。
 

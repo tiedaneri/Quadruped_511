@@ -1,21 +1,7 @@
 # third-party folder
 
-
-set(CMAKE_SKIP_BUILD_RPATH TRUE)
-set(CMAKE_SKIP_INSTALL_RPATH TRUE)
-
-# 覆盖共享库的默认行为
-function(override_shared_library_settings target_name)
-    set_target_properties(${target_name} PROPERTIES
-        NO_SONAME TRUE
-        SUFFIX ".so.3.2"  # 直接使用完整后缀
-    )
-endfunction()
-
 add_subdirectory(qpOASES)
 add_subdirectory(Goldfarb_Optimizer)
-
-override_shared_library_settings(qpOASES)
 
 include_directories("include")
 include_directories("include/lord_imu/Include")

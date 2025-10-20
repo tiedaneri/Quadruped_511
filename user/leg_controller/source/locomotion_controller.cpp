@@ -438,7 +438,7 @@ void locomotion_controller::run()
 
         const float max_vx = 0.6f;   // 限制最大前进速度
         vx_rc = std::min(max_vx, vx_rc);
-        const float min_vx = 0.f;   // 限制最小前进速度
+        const float min_vx = 0.f;    // 限制最小前进速度
         vx_rc = std::max(min_vx, vx_rc); 
     }
 #endif

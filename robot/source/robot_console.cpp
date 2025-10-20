@@ -109,11 +109,13 @@ uint8_t robot_console::setupScheduler()
  */
 uint8_t robot_console::init_hardware()
 {
+#if defined(ROBOT1) && defined(FROBOT1)
     if(!usb_dev.init_usb()){//传感器采集板(USB设备)初始化
         printf("[ERROR]: robot_console: init usb device!!\n");
         return 0;
     }
     printf("[robot_console] init usb device success!!\n");
+#endif
     if(!at9s.init_serial())//遥控器初始化
     {
         printf("[ERROR]: robot_console: init serial!!\n");
