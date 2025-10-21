@@ -33,6 +33,9 @@ channel_data[7]-VB: ANTICLOCKWISE-306, MIDDLE-1074, CLOCKWISE-1694   最大差�
 #define UP_AT9S_H
 
 #include "up_serial.h"
+#include <cmath>
+
+const float DEADZONE_THRESHOLD = 0.013f; //摇杆死区阈值
 
 typedef enum //3位钮子开关类型
 {
@@ -72,6 +75,7 @@ class up_at9s: public up_serial
     uint8_t receive_original_data(void);
     void unpack_original_data(void);
     void analysis_cmd(void);
+    void applyDeadZone(void);
 
     //变量：存储原始sbus数据
     uint8_t original_data[25];

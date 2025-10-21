@@ -129,10 +129,27 @@ void up_at9s::analysis_cmd()
     cmd.LRO = (996.0f  - (float)channel_data[0]) / 689.0f / 2.0f;
     cmd.RRO = (1006.0f - (float)channel_data[3]) / 672.0f / 2.0f;
     cmd.LCO = (1006.0f - (float)channel_data[1]) / 570.0f / 2.0f;
+#ifdef ROBOT1
     cmd.RCO = ((999.0f  - (float)channel_data[2]) / 607.0f / 2.0f) - 0.253f; //遥控器1的vx指令不准，加偏置
-
+#endif
+#ifdef ROBOT2
+    cmd.RCO = (999.0f  - (float)channel_data[2]) / 607.0f / 2.0f;
+#endif
     cmd.VB = (1694.0f  - (float)channel_data[7]) / 1388.0f;
+}
 
+/**
+ * @description: 应用死区屏蔽遥控器零飘
+ * @param {无}
+ * @return {无}
+ */
+void up_at9s::applyDeadZone()
+{
+    if(fabsf(cmd.LRO) <= DEADZONE_THRESHOLD) cmd.LRO = 0.0f;  // 左摇杆横向
+    if(fabsf(cmd.LCO) <= DEADZONE_THRESHOLD) cmd.LCO = 0.0f;  // 左摇杆竖向  
+    if(fabsf(cmd.RRO) <= DEADZONE_THRESHOLD) cmd.RRO = 0.0f;  // 右摇杆横向
+    if(fabsf(cmd.RCO) <= DEADZONE_THRESHOLD) cmd.RCO = 0.0f;  // 右摇杆竖向
+    if(fabsf(cmd.VB)  <= DEADZONE_THRESHOLD) cmd.VB  = 0.0f;  // 旋钮VB
 }
 
 /**
@@ -145,5 +162,6 @@ uint8_t up_at9s::update_cmd()
     if(!receive_original_data()) return 0;//接收原始数据，出错则退出
     unpack_original_data();//解码原始数据
     analysis_cmd();//解析指令
+    applyDeadZone();
     return 1;//成功
 }
