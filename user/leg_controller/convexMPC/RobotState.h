@@ -19,11 +19,13 @@ using Eigen::Quaternionf;
 class RobotState
 {
     public:
+        void set(flt* p, flt* v, flt* q, flt* w, flt* Fex, flt* r, flt yaw);
         void set(flt* p, flt* v, flt* q, flt* w, flt* r, flt yaw);
         //void compute_rotations();
         void print();
-        Matrix<fpt,3,1> p,v,w;
+        Matrix<fpt,3,1> p,v,w,Fex;
         Matrix<fpt,3,4> r_feet;
+        Matrix<fpt,3,1> r_ex; 
         Matrix<fpt,3,3> R;
         Matrix<fpt,3,3> R_yaw;
         Matrix<fpt,3,3> I_body;

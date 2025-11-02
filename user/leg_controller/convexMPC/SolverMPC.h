@@ -60,10 +60,12 @@ T sq(T a)
     return a*a;
 }
 
-
-void solve_mpc(update_data_t* update, problem_setup* setup);
-void ct_ss_mats(Matrix<fpt,3,3> I_world, fpt m, Matrix<fpt,3,4> r_feet, Matrix<fpt,3,3> R_yaw, Matrix<fpt,13,13>& A, Matrix<fpt,13,12>& B);
+void solve_mpc_1(update_data_t* update, problem_setup* setup);
+void solve_mpc_2(update_data_Fex_t* update, problem_setup* setup);
+void ct_ss_mats(Matrix<fpt,3,3> I_world, fpt m, Matrix<fpt,3,4> r_feet, Matrix<fpt,3,3> R_yaw, Matrix<fpt,3,1> r_ex, Matrix<fpt,18,18>& A, Matrix<fpt,18,12>& B);
+void ct_ss_mats_1(Matrix<fpt,3,3> _I_world, fpt m, Matrix<fpt,3,4> r_feet, Matrix<fpt,3,3> R_yaw, Matrix<fpt,15,15>& A, Matrix<fpt,15,12>& B);
 void resize_qp_mats();
 void c2qp(Matrix<fpt,13,13> Ac, Matrix<fpt,13,12> Bc,fpt dt,s16 horizon);
+void c2qp_1(Matrix<fpt,15,15> Ac, Matrix<fpt,15,12> Bc, fpt dt, s16 horizon);
 mfp* get_q_soln();
 #endif

@@ -92,13 +92,13 @@ class locomotion_controller
     bool first_stance[4];//当前周期第一次进入支撑相标志，true：第一次
     bool first_swing[4]; //当前周期第一次进入摆动相标志，true：第一次
 
-    const float step_max  = 0.1;//m
+    const float step_max  = 0.3;//m
     const float vx_max  = 0.6;//前进速度，m/s
     const float vy_max  = 0.4;//m/s
     const float vyaw_max = 2;//rad/s
     const float hight_max = 0.1;//m
 
-    const float vyaw_correct = 0.005;
+    const float vyaw_correct = 0.f;
 
     float dtmpc;//一个mpc步长的时间=步态周期/预测步长
     float x_comp_integral;//x方向速度对z轴位置的影响

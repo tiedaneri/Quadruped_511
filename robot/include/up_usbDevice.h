@@ -20,7 +20,7 @@ using namespace std;
 struct usb_device_data
 {
     uint8_t header[4];
-    float sdata[6];
+    float sdata[6];       //角位移传感器+力传感器
     uint8_t tail[4];
 };
 

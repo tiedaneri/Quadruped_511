@@ -555,3 +555,12 @@
                win上仓库通过共享文件夹与虚拟机ubuntu共享仓库，ubuntu共享路径为 /mnt/hgfs/Quadruped_511，编译位置位于 /home/tiedan/Quadruped_511_compile，\
                编译位置下存有命令行脚本copy.sh，运行其可直接删除-拷贝-构建-编译。
 
+20251025:
+         0.实机机器人施工外力MPC；
+            1）初步考虑直接复制仿真中convexMPC_interface、SolverMPC的内容，locomotion_controller中的调用好说；
+            2）仿真中因为两个机器人也是使用的同一套代码，使用了参数区分调用函数，实机下用宏定义区分。
+         1.初步完成代码施工，编译通过，未上机测试；
+            
+20251030:
+         0.上条代码已上机测试，可正常运行；
+

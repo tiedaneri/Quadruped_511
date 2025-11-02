@@ -49,6 +49,11 @@ void locomotion_controller::init()
 
     trot_gait.c_gait = 9;//一个dt_gait，控制器执行的次数
     trot_gait.T = 0.4;//一个完整步态周期时间
+
+#ifdef ROBOT2
+    trot_gait.T = 0.25;//一个完整步态周期时间    
+#endif
+
     //各腿相位偏置
     trot_gait.phase_offset[0] = 0;
     trot_gait.phase_offset[1] = 0.5;
@@ -130,7 +135,7 @@ void locomotion_controller::run()
     //遥控器期望抬腿高度指令
     float vx_rc   = rc_cmd->RCO * vx_max;
     float vy_rc   = rc_cmd->LRO * vy_max;
-    float vyaw_rc = rc_cmd->RRO * vyaw_max + vyaw_correct;
+    float vyaw_rc = rc_cmd->RRO * vyaw_max;
     float hf_rc   = rc_cmd->VB  * hight_max;
     
     //UP:无速度指令时静止
@@ -151,12 +156,12 @@ void locomotion_controller::run()
 
     //低通滤波
     float filter = 0.03;//期望机器人状态指令滤波系数0.03
+#ifdef ROBOT2
+    filter = 0.005;     //二号机器人指令滤波系数0.005
+#endif
     vx_des   = vx_rc   * filter + vx_des   * (1 - filter);
     vy_des   = vy_rc   * filter + vy_des   * (1 - filter);
     vyaw_des = vyaw_rc * filter + vyaw_des * (1 - filter);
-    // vx_des   = 0;
-    // vy_des   = 0;
-    // vyaw_des = vyaw_correct;
     hf_des   = hf_rc   * filter   + hf_des * (1 - filter);
 
     for(int leg = 0; leg < 4; leg++)//基于实际触地状态的复杂地形运动控制策略
@@ -360,8 +365,15 @@ void locomotion_controller::run()
             _wbc_data->vFoot_des[leg] = body_data->r_body.transpose() * tra[leg].v;//世界系下                                 
             _wbc_data->aFoot_des[leg] = body_data->r_body.transpose() * tra[leg].a; 
             //启动该腿的关节位置PD控制
+#ifdef ROBOT1
             leg_drv->cmd[leg].kp = Vec3<float>(20, 20, 20).asDiagonal() * ROBOT_K;
             leg_drv->cmd[leg].kd = Vec3<float>(0.2, 0.2, 0.2).asDiagonal() * ROBOT_K;
+#endif
+
+#ifdef ROBOT2
+            leg_drv->cmd[leg].kp = Vec3<float>(40, 20, 20).asDiagonal() * ROBOT_K;
+            leg_drv->cmd[leg].kd = Vec3<float>(0.4, 0.2, 0.2).asDiagonal() * ROBOT_K;
+#endif
             // leg_drv->cmd[leg].kp = Vec3<float>(40, 40, 40).asDiagonal();
             // leg_drv->cmd[leg].kd = Vec3<float>(0.4, 0.4, 0.4).asDiagonal();
             // leg_drv->cmd[leg].kp = Vec3<float>(30, 30, 30).asDiagonal();
@@ -419,7 +431,7 @@ void locomotion_controller::run()
     //遥控器期望抬腿高度指令
     float vx_rc   = rc_cmd->RCO * vx_max;
     float vy_rc   = rc_cmd->LRO * vy_max;
-    float vyaw_rc = rc_cmd->RRO * vyaw_max + vyaw_correct;
+    float vyaw_rc = rc_cmd->RRO * vyaw_max;
     float hf_rc   = rc_cmd->VB  * hight_max;
 #endif
 
@@ -427,7 +439,7 @@ void locomotion_controller::run()
     // 平行跟随策略
     float vx_rc   = 0.f;
     float vy_rc   = 0.f;
-    float vyaw_rc = rc_cmd->RRO * vyaw_max + vyaw_correct;
+    float vyaw_rc = rc_cmd->RRO * vyaw_max;
     float hf_rc   = rc_cmd->VB  * hight_max;
     if(1 == 1){
         float vx_kp = 3.;
@@ -443,14 +455,13 @@ void locomotion_controller::run()
     }
 #endif
     
-    float filter = 0.03;//期望机器人状态指令滤波系数0.03，一阶低通滤波，滤波强响应慢
+    float filter = 0.005; //指令滤波系数0.005，一阶低通滤波，系数越小滤波强响应慢
+    float filter_hf = 0.03;
+
     vx_des   = vx_rc   * filter + vx_des   * (1 - filter);
     vy_des   = vy_rc   * filter + vy_des   * (1 - filter);
     vyaw_des = vyaw_rc * filter + vyaw_des * (1 - filter);
-    // vx_des   = 0;
-    // vy_des   = 0;
-    // vyaw_des = vyaw_correct;
-    hf_des   = hf_rc   * filter   + hf_des * (1 - filter);
+    hf_des   = hf_rc   * filter_hf   + hf_des * (1 - filter_hf);
 
     for(int leg = 0; leg < 4; leg++)//基于实际触地状态的复杂地形运动控制策略
     {
@@ -601,8 +612,15 @@ void locomotion_controller::run()
             pb_hfc[leg] = tra[leg].p;//记录轨迹当前位置点
 
             //启动该腿的关节位置PD控制
+#ifdef ROBOT1
             leg_drv->cmd[leg].kp = Vec3<float>(20, 20, 20).asDiagonal() * ROBOT_K;
             leg_drv->cmd[leg].kd = Vec3<float>(0.2, 0.2, 0.2).asDiagonal() * ROBOT_K;
+#endif
+
+#ifdef ROBOT2
+            leg_drv->cmd[leg].kp = Vec3<float>(40, 20, 20).asDiagonal() * ROBOT_K;
+            leg_drv->cmd[leg].kd = Vec3<float>(0.4, 0.2, 0.2).asDiagonal() * ROBOT_K;
+#endif
             // leg_drv->cmd[leg].kp = Vec3<float>(40, 40, 40).asDiagonal();
             // leg_drv->cmd[leg].kd = Vec3<float>(0.4, 0.4, 0.4).asDiagonal();
             // leg_drv->cmd[leg].kp = Vec3<float>(30, 30, 30).asDiagonal();
@@ -650,9 +668,9 @@ void locomotion_controller::run_MPC()
     //初始参考轨迹
     float trajInitial[12] = 
     {
-        0,  0,  yaw_des,     //角度
-        px, py, body_height, //位置
-        0,  0,  vyaw_des,    //角速度
+        0,  0,  yaw_des,                  //角度
+        px, py, body_height,              //位置
+        0,  0,  vyaw_des,                 //角速度
         v_des_world(0), v_des_world(1), 0 //速度
     };
     //MPC完整轨迹
@@ -680,22 +698,40 @@ void locomotion_controller::run_MPC()
       
     // float Q[12] = {20, 20, 10, 5, 5, 10, 0, 0, 0.3, 0.3, 0.3, 0.1};  
     
-    #ifdef ROBOT1
-    float Q[12] = {20, 20, 10, 20, 20, 10, 0, 0, 0.3, 0.3, 0.3, 0.1}; 
-    #endif
-    #ifdef ROBOT2
-    float Q[12] = {10, 10, 10, 20, 20, 10, 0, 0, 0.3, 0.3, 0.3, 0.1}; 
-    #endif
+#if defined(ROBOT1) && defined(FROBOT1)
+    float Q[18] = {20, 20, 10, 20, 20, 10, 0, 0, 0.3, 0.3, 0.3, 0.1, 0, 0, 0, 0, 0, 0}; // 考虑外力，18列
+#endif
+#if defined(ROBOT1) && (!defined(FROBOT1)) // 1号机遥控Q阵
+    float Q[15] = {20, 20, 10, 20, 20, 10, 0, 0, 0.3, 0.3, 0.3, 0.1, 0, 0, 0}; 
+#endif
+#ifdef ROBOT2                              // 2号机遥控Q阵
+    float Q[15] = {10, 10, 5, 20, 40, 10, 0, 0, 0.3, 0.3, 0.3, 0.1, 0, 0, 0};
+#endif
     
     //mpc参数
     float yaw = body_data->rpy(2);
-    float* weights = Q;
-    float alpha = 4e-5;
+    float* weights = Q; //二次优化标准表达式中Q矩阵的左上角12x12子阵主对角线元素的值
+    float alpha = 4e-5; //二次优化标准表达式中R矩阵的系数值
     // float alpha = 1e-6;
     float p[3] = {body_data->position(0),    body_data->position(1),    body_data->position(2)};
     float v[3] = {body_data->v_world(0),     body_data->v_world(1),     body_data->v_world(2)};
     float w[3] = {body_data->omega_world(0), body_data->omega_world(1), body_data->omega_world(2)};
     float q[4] = {body_data->orientation(0), body_data->orientation(1), body_data->orientation(2), body_data->orientation(3)};
+
+#if defined(ROBOT1) && defined(FROBOT1) //获取从机上的力传感的数据输入MPC
+    
+    float Fex[3] = {0., 0., 0.};
+
+    //外力向量，注意要转到世界系下
+    Vec3<float> Fex_vec(usb_data->sdata[3], 
+                        usb_data->sdata[4], 
+                        usb_data->sdata[5]);
+    Fex_vec = body_data->r_body.transpose() * Fex_vec; //转到世界系下
+    for(int i = 0; i < 3; i++){
+        Fex[i] = Fex_vec(i);
+    }
+
+#endif
 
     float r[12];//世界系下足端位置
     for(int leg = 0; leg < 4; leg++)
@@ -719,7 +755,14 @@ void locomotion_controller::run_MPC()
 
     // update_solver_settings(10000, 1e-07, 1e-08, 1.5, 0.1, 0);
 
-    update_problem_data_floats(p,v,q,w,r,yaw,weights,mpc_traj,alpha,mpc_stance_flag);
+#if defined(ROBOT1) && defined(FROBOT1) //只要1做从机，有外力MPC
+    update_Fex_problem_data_floats(p,v,q,w,Fex,r,yaw,weights,mpc_traj,alpha,mpc_stance_flag); //带外力的MPC，更新求解MPC的参数，并求解MPC
+#endif
+
+#ifndef FROBOT1 //只要不是1做从机（包含直接遥控1和2的情况），无外力MPC
+    update_problem_data_floats(p,v,q,w,r,yaw,weights,mpc_traj,alpha,mpc_stance_flag); //没有考虑外力的MPC，更新求解MPC的参数，并求解MPC        
+#endif
+    
 
     //获取mpc结果-足端力
     for(int leg = 0; leg < 4; leg++)

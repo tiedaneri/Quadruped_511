@@ -22,7 +22,14 @@
 #include <string.h>//包含"memset" 的定义
 
 //各腿各关节的实际o位置与设定位置的偏移量
+#ifdef ROBOT1
 const float abad_offset[4] = {0.025f, -0.025f, 0.f, 0.f};
+#endif
+
+#ifdef ROBOT2
+const float abad_offset[4] = {0.01f, -0.025f, 0.f, 0.f};
+#endif
+
 const float hip_offset[4]  = {M_PI / 2.f, -M_PI / 2.f, -M_PI / 2.f, M_PI / 2.f};
 const float knee_offset[4] = {4.35f, -4.35f, 4.35f, -4.35f};
 

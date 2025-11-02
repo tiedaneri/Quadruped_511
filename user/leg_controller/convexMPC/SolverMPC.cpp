@@ -16,16 +16,22 @@ RobotState rs;
 using Eigen::Dynamic;
 // using Eigen::StorageOptions::RowMajor;
 
-Matrix<fpt,13*HORIZON_LENGTH,13> A_qp;
+Matrix<fpt,18*HORIZON_LENGTH,18> A_qp;
+Matrix<fpt,15*HORIZON_LENGTH,15> A_qp_1;
 
-Matrix<fpt,13*HORIZON_LENGTH,12*HORIZON_LENGTH> B_qp;
+Matrix<fpt,18*HORIZON_LENGTH,12*HORIZON_LENGTH> B_qp;
+Matrix<fpt,15*HORIZON_LENGTH,12*HORIZON_LENGTH> B_qp_1;
 
-Matrix<fpt,13,12> Bdt;
-Matrix<fpt,13,13> Adt;
-Matrix<fpt,25,25> ABc,expmm;
-Eigen::DiagonalMatrix<fpt,13*HORIZON_LENGTH> S;
+Matrix<fpt,18,12> Bdt;
+Matrix<fpt,15,12> Bdt_1;
+Matrix<fpt,18,18> Adt;
+Matrix<fpt,15,15> Adt_1;
+Matrix<fpt,30,30> ABc, expmm;
+Eigen::DiagonalMatrix<fpt, 18*HORIZON_LENGTH> S;
+Eigen::DiagonalMatrix<fpt, 15*HORIZON_LENGTH> S_1;
 
-Matrix<fpt,13*HORIZON_LENGTH,1> X_d;
+Matrix<fpt,18*HORIZON_LENGTH,1> X_d;
+Matrix<fpt,15*HORIZON_LENGTH,1> X_d_1;
 Matrix<fpt,20*HORIZON_LENGTH,1> U_b;
 // Matrix<fpt,20*HORIZON_LENGTH,12*HORIZON_LENGTH,RowMajor> fmat;
 // Matrix<fpt,12*HORIZON_LENGTH,12*HORIZON_LENGTH,RowMajor> qH;
@@ -42,6 +48,7 @@ qpOASES::real_t* lb_qpoases;
 qpOASES::real_t* ub_qpoases;
 qpOASES::real_t* q_soln;     //最终结果存放在这儿
 
+//red——reduce，变量消除优化后的QP矩阵
 qpOASES::real_t* H_red;
 qpOASES::real_t* g_red;
 qpOASES::real_t* A_red;
@@ -80,44 +87,26 @@ void matrix_to_real(qpOASES::real_t* dst, Matrix<fpt,Dynamic,Dynamic> src, s16 r
   }
 }
 
-Matrix<fpt,13,13> powerMats[HORIZON_LENGTH+1];
-void c2qp(Matrix<fpt,13,13> Ac, Matrix<fpt,13,12> Bc,fpt dt,s16 horizon)
+//四元数转换成rpy角度
+void quat_to_rpy(Quaternionf q, Matrix<fpt,3,1>& rpy)
 {
-  B_qp.setZero();
-  ABc.setZero();
-  ABc.block(0,0,13,13) = dt*Ac;
-  ABc.block(0,13,13,12) = dt*Bc;
-  expmm = ABc.exp();
-  Adt = expmm.block(0,0,13,13);
-  Bdt = expmm.block(0,13,13,12);
-
-  powerMats[0].setIdentity();
-
-  for(int i = 1; i < horizon+1; i++) {
-    powerMats[i].noalias() = Adt*powerMats[i-1];
-  }
-
-  for(s16 r = 0; r < horizon; r++)
-  {
-    A_qp.block(13*r,0,13,13).noalias() = powerMats[r+1];
-    for(s16 c = 0; c < horizon; c++)
-    {
-      if(r >= c)
-      {
-        s16 a_num = r-c;
-        B_qp.block(13*r,12*c,13,12).noalias() = powerMats[a_num]*Bdt;
-      }
-    }
-  }
+  fpt as = t_min(-2.*(q.x()*q.z()-q.w()*q.y()),.99999);
+  rpy(0) = atan2(2.f*(q.x()*q.y()+q.w()*q.z()),sq(q.w()) + sq(q.x()) - sq(q.y()) - sq(q.z()));
+  rpy(1) = asin(as);
+  rpy(2) = atan2(2.f*(q.y()*q.z()+q.w()*q.x()),sq(q.w()) - sq(q.x()) - sq(q.y()) + sq(q.z()));
 }
 
 //矩阵初始化
 void resize_qp_mats()
 {
   A_qp.setZero();
+  A_qp_1.setZero();
   B_qp.setZero();
+  B_qp_1.setZero();
   S.setZero();
+  S_1.setZero();
   X_d.setZero();
+  X_d_1.setZero();
   U_b.setZero();
   fmat.setZero();
   qH.setZero();
@@ -142,59 +131,342 @@ inline Matrix<fpt,3,3> cross_mat(Matrix<fpt,3,3> I_inv, Matrix<fpt,3,1> r)
 {
   Matrix<fpt,3,3> cm;
   cm << 0.f, -r(2), r(1),
-    r(2), 0.f, -r(0),
-    -r(1), r(0), 0.f;
+        r(2), 0.f, -r(0),
+        -r(1), r(0), 0.f;
   return I_inv * cm;
 }
-//continuous time state space matrices.
-void ct_ss_mats(Matrix<fpt,3,3> I_world, fpt m, Matrix<fpt,3,4> r_feet, Matrix<fpt,3,3> R_yaw, Matrix<fpt,13,13>& A, Matrix<fpt,13,12>& B)
+
+//continuous time state space matrices.连续时间状态矩阵函数
+void ct_ss_mats(Matrix<fpt,3,3> I_world, fpt m, Matrix<fpt,3,4> r_feet, Matrix<fpt,3,3> R_yaw, Matrix<fpt,3,1> r_ex, 
+                Matrix<fpt,18,18>& A, Matrix<fpt,18,12>& B)
 {
+  Matrix<fpt,3,3> I_inv = I_world.inverse();
+
   A.setZero();
   A(3,9) = 1.f;
   A(4,10) = 1.f;
   A(5,11) = 1.f;
 
-  A(11,12) = 1.f;
-  A.block(0,6,3,3) = R_yaw.transpose();
+  A(9,12) = 1.f;
+  A(10,13) = 1.f;
+  A(11,14) = 1.f;
+  A.block(0,6,3,3) = R_yaw.transpose();  
+  A.block(6, 15, 3, 3) = cross_mat(I_inv, r_ex);
+  A.block(9, 15, 3, 3) = Matrix<fpt, 3, 3>::Identity() / m;
 
   B.setZero();
-  Matrix<fpt,3,3> I_inv = I_world.inverse();
-
   for(s16 b = 0; b < 4; b++)
   {
-    B.block(6,b*3,3,3) = cross_mat(I_inv,r_feet.col(b));
+    B.block(6,b*3,3,3) = cross_mat(I_inv, r_feet.col(b));
     B.block(9,b*3,3,3) = Matrix<fpt,3,3>::Identity() / m;
   }
 }
-//四元数转换成rpy角度
-void quat_to_rpy(Quaternionf q, Matrix<fpt,3,1>& rpy)
+
+Matrix<fpt,18,18> powerMats[HORIZON_LENGTH+1]; // A的连乘矩阵
+//从连续时间状态矩阵计算得到A_qp、B_qp
+void c2qp(Matrix<fpt,18,18> Ac, Matrix<fpt,18,12> Bc, fpt dt, s16 horizon)
 {
-  fpt as = t_min(-2.*(q.x()*q.z()-q.w()*q.y()),.99999);
-  rpy(0) = atan2(2.f*(q.x()*q.y()+q.w()*q.z()),sq(q.w()) + sq(q.x()) - sq(q.y()) - sq(q.z()));
-  rpy(1) = asin(as);
-  rpy(2) = atan2(2.f*(q.y()*q.z()+q.w()*q.x()),sq(q.w()) - sq(q.x()) - sq(q.y()) + sq(q.z()));
+  B_qp.setZero();
+  ABc.setZero();
+  ABc.block(0,0,18,18) = dt*Ac;
+  ABc.block(0,18,18,12) = dt*Bc;
+  expmm = ABc.exp(); //使用矩阵指数离散
+  Adt = expmm.block(0,0,18,18);
+  Bdt = expmm.block(0,18,18,12);
+
+  powerMats[0].setIdentity();
+  for(int i = 1; i < horizon+1; i++) {
+    powerMats[i].noalias() = Adt*powerMats[i-1];
+  }
+
+  for(s16 r = 0; r < horizon; r++)
+  {
+    A_qp.block(18*r,0,18,18).noalias() = powerMats[r+1];
+    for(s16 c = 0; c < horizon; c++)
+    {
+      if(r >= c)
+      {
+        s16 a_num = r-c;
+        B_qp.block(18*r,12*c,18,12).noalias() = powerMats[a_num]*Bdt;
+      }
+    }
+  }
 }
 
-Matrix<fpt,13,1> x_0;
+Matrix<fpt,18,1> x_0;
 Matrix<fpt,3,3> I_world;
-Matrix<fpt,13,13> A_ct;
-Matrix<fpt,13,12> B_ct_r;
+Matrix<fpt,18,18> A_ct;
+Matrix<fpt,18,12> B_ct_r;
 Matrix<fpt,3,1> rpy;
 
 bool firstRun = true;
-void solve_mpc(update_data_t* update, problem_setup* setup)
+void solve_mpc_2(update_data_Fex_t* update, problem_setup* setup)
 {
-  if(firstRun) //这里是仅存的两组魔法数字
+  if(firstRun) //对应公式中Q、R矩阵
   {
-    //weights
-    Matrix<fpt,13,1> full_weight;
-    for(u8 i = 0; i < 12; i++)
+    //weights，公式中Q阵
+    Matrix<fpt,18,1> full_weight;
+    for(u8 i = 0; i < 18; i++)
     {
       full_weight(i) = update->weights[i];
     }
-    full_weight(12) = 0.f;
-    S.diagonal() = full_weight.replicate(setup->horizon,1);
-    //alpha
+    S.diagonal() = full_weight.replicate(setup->horizon, 1); //行方向复制horizon次，列方向复制1次
+    //alpha，公式中R阵
+    alpha12.setIdentity();
+    alpha12 = (update->alpha) * alpha12;
+    firstRun = false;
+  }
+  //robot state
+  rs.set(update->p, update->v, update->q, update->w, update->Fex, update->r, update->yaw);
+  //rpy
+  quat_to_rpy(rs.q, rpy);
+  //x0
+  x_0 << rpy(2), rpy(1), rpy(0), rs.p, rs.w, rs.v, 0., 0., -9.8f, rs.Fex;
+  //I，只考虑偏航角的旋转矩阵
+  I_world = rs.R_yaw * rs.I_body * rs.R_yaw.transpose();
+  //连续时间状态矩阵
+  ct_ss_mats(I_world, rs.m, rs.r_feet, rs.R_yaw, rs.r_ex, A_ct, B_ct_r);
+  //QP matrices，从连续时间状态矩阵计算得到A_qp、B_qp
+  c2qp(A_ct, B_ct_r, setup->dt, setup->horizon);
+  //X_d
+  for(s16 i = 0; i < setup->horizon; i++)
+  {
+    for(s16 j = 0; j < 12; j++)
+      X_d(18*i+j,0) = update->traj[12*i+j];
+  }
+  //U_b约束矩阵，摩擦锥
+  s16 k = 0;
+  for(s16 i = 0; i < setup->horizon; i++)
+  {
+    for(s16 j = 0; j < 4; j++)
+    {
+      U_b(5*k + 0) = BIG_NUMBER;
+      U_b(5*k + 1) = BIG_NUMBER;
+      U_b(5*k + 2) = BIG_NUMBER;
+      U_b(5*k + 3) = BIG_NUMBER;
+      U_b(5*k + 4) = update->gait[i*4 + j] * setup->f_max;
+      k++;
+    }
+  }
+  fpt mu = 1.f/setup->mu;
+  Matrix<fpt,5,3> f_block;
+  f_block <<  mu, 0,  1.f,    // Fx  ≤ μFz
+             -mu, 0,  1.f,    // -Fx ≤ μFz  
+              0,  mu, 1.f,    // Fy  ≤ μFz
+              0, -mu, 1.f,    // -Fy ≤ μFz
+              0,   0, 1.f;    // Fz  ≥ 0 (支撑力为正)
+
+  for(s16 i = 0; i < setup->horizon*4; i++)
+  {
+    fmat.block(i*5,i*3,5,3) = f_block;
+  }
+  
+  qH.triangularView<Eigen::Upper>() = B_qp.transpose()*S*B_qp;
+  qH.triangularView<Eigen::Lower>() = qH.transpose();
+  qH.diagonal() += alpha12.diagonal();
+
+  qg.noalias() = B_qp.transpose()*S*(A_qp*x_0 - X_d);
+
+  // H_qpoases = (double*)qH.data();
+  // g_qpoases = (double*)qg.data();
+  // A_qpoases = (double*)fmat.data();
+  // ub_qpoases = (double*)U_b.data();
+
+  matrix_to_real(H_qpoases,qH,12*HORIZON_LENGTH, 12*HORIZON_LENGTH);
+  matrix_to_real(g_qpoases,qg,12*HORIZON_LENGTH, 1);
+  matrix_to_real(A_qpoases,fmat,HORIZON_LENGTH*20, HORIZON_LENGTH*12);
+  matrix_to_real(ub_qpoases,U_b,HORIZON_LENGTH*20, 1);
+
+  for(s16 i = 0; i < 20*setup->horizon; i++) {lb_qpoases[i] = 0.0f;}
+
+  /* 变量消除优化，一个控制周期中根据是否为摆动腿，消除矩阵中的相关元素 */
+  s16 num_constraints = 20*setup->horizon;   //QP问题中所有约束的总数
+  s16 num_variables = 12*setup->horizon;     //QP问题中所有优化变量的总数
+  qpOASES::int_t nWSR = 100;
+  int new_vars = num_variables;
+  int new_cons = num_constraints;
+
+  for(int i = 0; i < num_constraints; i++) con_elim[i] = 0; //标记第i个约束是否需要消除,（1为消除，0为保留）
+  for(int i = 0; i < num_variables; i++)   var_elim[i] = 0; //标记第i个变量是否需要消除
+
+  for(int i = 0; i < num_constraints; i++) 
+  {
+    if(!(near_zero(lb_qpoases[i]) && near_zero(ub_qpoases[i]))) continue; 
+    double* c_row = &A_qpoases[i*num_variables];
+    for(int j = 0; j < num_variables; j++)
+    {
+      if(near_one(c_row[j]))
+      {
+        new_vars -= 3;       //剩余的变量和约束数
+        new_cons -= 5;
+        int cs = (j*5)/3 -3;
+        var_elim[j-2] = 1;   //标记要消除的变量
+        var_elim[j-1] = 1;
+        var_elim[j  ] = 1;
+        con_elim[cs] = 1;    //标记要消除的约束
+        con_elim[cs+1] = 1;
+        con_elim[cs+2] = 1;
+        con_elim[cs+3] = 1;
+        con_elim[cs+4] = 1;
+      }
+    }
+  }
+  int var_ind[new_vars];
+  int con_ind[new_cons];
+
+  //var_ind[]：存储所有未被消除的变量在原始变量数组中的索引
+  int vc = 0;
+  for(int i = 0; i < num_variables; i++)
+  {
+    if(!var_elim[i])
+    {
+      if(!(vc<new_vars))
+      {
+        printf("BAD ERROR 1\n");
+      }
+      var_ind[vc] = i;
+      vc++;
+    }
+  }
+  //con_ind[]：存储所有未被消除的约束在原始变量数组中的索引
+  vc = 0;
+  for(int i = 0; i < num_constraints; i++)
+  {
+    if(!con_elim[i])
+    {
+      if(!(vc<new_cons))
+      {
+        printf("BAD ERROR 1\n");
+      }
+      con_ind[vc] = i;
+      vc++;
+    }
+  }
+ 
+  //构建新的QP矩阵
+  for(int i = 0; i < new_vars; i++)
+  {
+    int olda = var_ind[i];
+    g_red[i] = g_qpoases[olda];
+    for(int j = 0; j < new_vars; j++)
+    {
+      int oldb = var_ind[j];
+      H_red[i*new_vars + j] = H_qpoases[olda*num_variables + oldb];
+    }
+  }
+  for (int con = 0; con < new_cons; con++)
+  {
+    for(int st = 0; st < new_vars; st++)
+    {
+      float cval = A_qpoases[(num_variables*con_ind[con]) + var_ind[st] ];
+      A_red[con*new_vars + st] = cval;
+    }
+  }
+  for(int i = 0; i < new_cons; i++)
+  {
+    int old = con_ind[i];
+    ub_red[i] = ub_qpoases[old];
+    lb_red[i] = lb_qpoases[old];
+  }
+
+  /* 调用qpOASES求解器 */
+  Timer t2;
+  qpOASES::QProblem problem_red (new_vars, new_cons);                                 // 1. 创建一个qpOASES问题实例
+  qpOASES::Options op;                                                                // 2. 设置求解器选项
+  op.setToMPC();
+  op.printLevel = qpOASES::PL_NONE;
+  problem_red.setOptions(op);
+
+  int rval = problem_red.init(H_red, g_red, A_red, NULL, NULL, lb_red, ub_red, nWSR);  // 3. 初始化并求解问题，在这里传入变量消除优化后的矩阵
+  (void)rval;
+  int rval2 = problem_red.getPrimalSolution(q_red);                                    // 4. 获取最优解，结果存在q_red中
+  if(rval2 != qpOASES::SUCCESSFUL_RETURN)  printf("failed to solve!\n");
+ //printf("t2 %.3f\n",t2.getMs());
+  vc = 0;
+  for(int i = 0; i < num_variables; i++)
+  {
+    if(var_elim[i]) //原本被消除的变量，结果直接赋值为0
+    {
+      q_soln[i] = 0.0f;
+    }
+    else            //未被消除的变量用QP解填充
+    {
+      q_soln[i] = q_red[vc];
+      vc++;
+    }
+  }
+}
+
+//continuous time state space matrices.连续时间状态矩阵函数,robot1专用
+void ct_ss_mats_1(Matrix<fpt,3,3> _I_world, fpt m, Matrix<fpt,3,4> r_feet, Matrix<fpt,3,3> R_yaw,
+                  Matrix<fpt,15,15>& A, Matrix<fpt,15,12>& B){
+  Matrix<fpt,3,3> I_inv = _I_world.inverse();
+
+  A.setZero();
+  A(3,9) = 1.f;
+  A(4,10) = 1.f;
+  A(5,11) = 1.f;
+
+  A(9,12) = 1.f;
+  A(10,13) = 1.f;
+  A(11,14) = 1.f;
+  A.block(0, 6, 3, 3) = R_yaw.transpose();  
+
+  B.setZero();
+  for(s16 b = 0; b < 4; b++)
+  {
+    B.block(6,b*3,3,3) = cross_mat(I_inv, r_feet.col(b));
+    B.block(9,b*3,3,3) = Matrix<fpt,3,3>::Identity() / m;
+  }
+}
+
+Matrix<fpt,15,15> powerMats_1[HORIZON_LENGTH+1]; // A的连乘矩阵
+//从连续时间状态矩阵计算得到A_qp、B_qp
+void c2qp_1(Matrix<fpt,15,15> Ac, Matrix<fpt,15,12> Bc, fpt dt, s16 horizon)
+{
+  B_qp_1.setZero();
+  ABc.setZero();
+  ABc.block(0,0,15,15) = dt*Ac;
+  ABc.block(0,15,15,12) = dt*Bc;
+  expmm = ABc.exp(); //使用矩阵指数离散
+  Adt_1 = expmm.block(0,0,15,15);
+  Bdt_1 = expmm.block(0,15,15,12);
+
+  powerMats_1[0].setIdentity();
+  for(int i = 1; i < horizon+1; i++) {
+    powerMats_1[i].noalias() = Adt_1*powerMats_1[i-1];
+  }
+
+  for(s16 r = 0; r < horizon; r++)
+  {
+    A_qp_1.block(15*r,0,15,15).noalias() = powerMats_1[r+1];
+    for(s16 c = 0; c < horizon; c++)
+    {
+      if(r >= c)
+      {
+        s16 a_num = r-c;
+        B_qp_1.block(15*r,12*c,15,12).noalias() = powerMats_1[a_num]*Bdt_1;
+      }
+    }
+  }
+}
+
+Matrix<fpt,15,1> x_0_1;
+Matrix<fpt,15,15> A_ct_1;
+Matrix<fpt,15,12> B_ct_r_1;
+
+void solve_mpc_1(update_data_t* update, problem_setup* setup)
+{
+  if(firstRun) //填充权重矩阵，对应公式中Q、R矩阵
+  {
+    //weights，公式中Q阵
+    Matrix<fpt,15,1> full_weight;
+    for(u8 i = 0; i < 15; i++)
+    {
+      full_weight(i) = update->weights[i];
+    }
+    S_1.diagonal() = full_weight.replicate(setup->horizon,1);//行方向复制horizon次，列方向复制1次
+    //alpha，公式中R阵
     alpha12.setIdentity();
     alpha12 = (update->alpha)*alpha12;
     firstRun = false;
@@ -202,22 +474,22 @@ void solve_mpc(update_data_t* update, problem_setup* setup)
   //robot state
   rs.set(update->p, update->v, update->q, update->w, update->r, update->yaw);
   //rpy
-  quat_to_rpy(rs.q,rpy);
+  quat_to_rpy(rs.q, rpy);
   //x0
-  x_0 << rpy(2), rpy(1), rpy(0), rs.p , rs.w, rs.v, -9.8f;
-  //I
+  x_0_1 << rpy(2), rpy(1), rpy(0), rs.p, rs.w, rs.v, 0., 0., -9.8f;
+  //I，只考虑偏航角的旋转矩阵
   I_world = rs.R_yaw * rs.I_body * rs.R_yaw.transpose();
   //连续时间状态矩阵
-  ct_ss_mats(I_world,rs.m,rs.r_feet,rs.R_yaw,A_ct,B_ct_r);
-  //QP matrices
-  c2qp(A_ct,B_ct_r,setup->dt,setup->horizon);
-  //x_d
+  ct_ss_mats_1(I_world, rs.m, rs.r_feet, rs.R_yaw, A_ct_1, B_ct_r_1);
+  //QP matrices，从连续时间状态矩阵计算得到A_qp、B_qp
+  c2qp_1(A_ct_1, B_ct_r_1, setup->dt, setup->horizon);
+  //X_d_1
   for(s16 i = 0; i < setup->horizon; i++)
   {
     for(s16 j = 0; j < 12; j++)
-      X_d(13*i+j,0) = update->traj[12*i+j];
+      X_d_1(15*i+j,0) = update->traj[12*i+j];
   }
-  //U_b
+  //U_b约束矩阵，摩擦锥
   s16 k = 0;
   for(s16 i = 0; i < setup->horizon; i++)
   {
@@ -234,21 +506,21 @@ void solve_mpc(update_data_t* update, problem_setup* setup)
   fpt mu = 1.f/setup->mu;
   Matrix<fpt,5,3> f_block;
   f_block <<  mu, 0,  1.f,
-    -mu, 0,  1.f,
-    0,  mu, 1.f,
-    0, -mu, 1.f,
-    0,   0, 1.f;
+             -mu, 0,  1.f,
+              0,  mu, 1.f,
+              0, -mu, 1.f,
+              0,   0, 1.f;
 
   for(s16 i = 0; i < setup->horizon*4; i++)
   {
     fmat.block(i*5,i*3,5,3) = f_block;
   }
   
-  qH.triangularView<Eigen::Upper>() = B_qp.transpose()*S*B_qp;
+  qH.triangularView<Eigen::Upper>() = B_qp_1.transpose() * S_1 * B_qp_1;
   qH.triangularView<Eigen::Lower>() = qH.transpose();
   qH.diagonal() += alpha12.diagonal();
 
-  qg.noalias() = B_qp.transpose()*S*(A_qp*x_0 - X_d);
+  qg.noalias() = B_qp_1.transpose()* S_1 *(A_qp_1 * x_0_1 - X_d_1);
 
   // H_qpoases = (double*)qH.data();
   // g_qpoases = (double*)qg.data();
