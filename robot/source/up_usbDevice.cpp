@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2025-09-09 16:09:26
- * @LastEditTime: 2025-09-09 16:13:24
+ * @LastEditTime: 2025-11-02 19:04:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /robot_software_WBC/robot/source/up_usbDevice.cpp
@@ -88,8 +88,8 @@ uint8_t usb_device::configure_port(){
     return 1;    
 }
 
-bool usb_device::read_and_parse_data()
-{
+bool usb_device::read_and_parse_data(){
+
     /* 1. 从串口读取数据，追加到缓存区 */
     uint8_t temp_buf[256];
     int bytes_read = read(fd, temp_buf, sizeof(temp_buf));
@@ -106,15 +106,23 @@ bool usb_device::read_and_parse_data()
     const size_t packet_size = sizeof(usb_device_data);
 
     // 循环查找，直到找不到更多完整的帧
-    while (_rx_buffer.size() >= packet_size) {
+    while(_rx_buffer.size() >= packet_size){
         bool found_packet = false;
-        for (size_t i = 0; i <= _rx_buffer.size() - packet_size; ++i) {
+        for(size_t i = 0; i <= _rx_buffer.size() - packet_size; ++i){
             // 检查帧头
-            if (memcmp(&_rx_buffer[i], expected_header, sizeof(expected_header)) == 0) {
+            if(memcmp(&_rx_buffer[i], expected_header, sizeof(expected_header)) == 0){
                 // 检查帧尾
-                if (memcmp(&_rx_buffer[i + sizeof(usb_device_data) - sizeof(expected_tail)], expected_tail, sizeof(expected_tail)) == 0) {
+                if(memcmp(&_rx_buffer[i + sizeof(usb_device_data) - sizeof(expected_tail)], expected_tail, sizeof(expected_tail)) == 0){
                     // 找到了一个完整的有效帧
                     memcpy(&data, &_rx_buffer[i], packet_size);
+
+                    // 将raw_data处理为角度和力
+                    data.sdata[1] = (data.sdata[1] - angleY_0)/factorY; // Y角度
+                    data.sdata[2] = (data.sdata[2] - angleZ_0)/factorZ; // Z角度
+
+                    data.sdata[3] = (data.sdata[3] - ref_voltageX) * 271.58f; // X方向力 (N)
+                    data.sdata[4] = (data.sdata[4] - ref_voltageY) * 299.58f; // Y方向力 (N)
+                    data.sdata[5] = (data.sdata[5] - ref_voltageZ) * 305.25f; // Z方向力 (N)
                     
                     // 从缓存区中删除已处理的数据（包括该帧本身和之前的所有无效数据）
                     _rx_buffer.erase(_rx_buffer.begin(), _rx_buffer.begin() + i + packet_size);
