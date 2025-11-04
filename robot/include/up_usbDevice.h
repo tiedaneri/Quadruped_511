@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2025-09-03 16:16:09
- * @LastEditTime: 2025-10-23 11:40:38
+ * @LastEditTime: 2025-11-04 11:46:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /robot_software_WBC/robot/include/up_usbDevice.h
@@ -31,10 +31,12 @@ public:
 
     uint8_t init_usb(void);
     bool read_and_parse_data();
+    void forceY_fixed();
 
     string port;
     uint32_t baud;
 
+    usb_device_data dataLast;           // 上一个周期的数据
     usb_device_data data;               // 解析后数据放在这
 
 private:
@@ -61,6 +63,13 @@ private:
     const float gain_y = 127.67f;           // Y轴AD620放大倍数
     const float gain_z = 127.67f;           // Z轴AD620放大倍数
     
+    // 添加以下成员变量用于Y方向力的实时校准
+    const float forceY_baseline_offset = 0.0f;   // Y方向力基线偏移量 (N)
+    const float forceY_modulo = 13.904f;            // Y方向力模数回绕值 (N)
+    const float forceY_jump_threshold = 10.0f;      // 跳变检测阈值 (N)
+    float forceY_cumulative_offset = 0.0f;          // Y方向力累积偏移量 (N)
+    float forceY_cumulative_offset_last = 0.0f;     // 上一周期的累积偏移量 (N)
+    bool forceY_initialized = false;                // Y方向力是否已初始化
 
     uint8_t open_port(void);
     uint8_t configure_port(void);

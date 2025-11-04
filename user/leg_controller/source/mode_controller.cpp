@@ -344,8 +344,8 @@ void mode_controller::fold_mode()
     leg_drv->leg_enable = true;//上电
     for(int leg = 0; leg < 4; leg++)//启用电机PD输出
     {
-        leg_drv->cmd[leg].kp = Vec3<float>(100, 100, 100).asDiagonal() * ROBOT_K;
-        leg_drv->cmd[leg].kd = Vec3<float>(2, 2, 2).asDiagonal() * ROBOT_K;
+        leg_drv->cmd[leg].kp = Vec3<float>(60, 60, 60).asDiagonal() * ROBOT_K;
+        leg_drv->cmd[leg].kd = Vec3<float>(1.2, 1.2, 1.2).asDiagonal() * ROBOT_K;
     }
     if(fold_time == 0.f)//第一次运行，记录当前位置作为初始位置
     {
@@ -375,8 +375,8 @@ void mode_controller::stand_up_mode()
     leg_drv->leg_enable = true;//上电
     for(int leg = 0; leg < 4; leg++)//启用电机PD输出
     {
-        leg_drv->cmd[leg].kp = Vec3<float>(100, 100, 100).asDiagonal() * ROBOT_K;
-        leg_drv->cmd[leg].kd = Vec3<float>(2, 2, 2).asDiagonal() * ROBOT_K;
+        leg_drv->cmd[leg].kp = Vec3<float>(60, 60, 60).asDiagonal() * ROBOT_K;
+        leg_drv->cmd[leg].kd = Vec3<float>(1.2, 1.2, 1.2).asDiagonal() * ROBOT_K;
     }
     if(stand_up_time == 0.f)//第一次运行，记录当前位置作为初始位置
     {
@@ -406,8 +406,8 @@ void mode_controller::stand_down_mode()
     leg_drv->leg_enable = true;//上电
     for(int leg = 0; leg < 4; leg++)//启用电机PD输出
     {
-        leg_drv->cmd[leg].kp = Vec3<float>(100, 100, 100).asDiagonal() * ROBOT_K;
-        leg_drv->cmd[leg].kd = Vec3<float>(2, 2, 2).asDiagonal() * ROBOT_K;
+        leg_drv->cmd[leg].kp = Vec3<float>(60, 60, 60).asDiagonal() * ROBOT_K;
+        leg_drv->cmd[leg].kd = Vec3<float>(1.2, 1.2, 1.2).asDiagonal() * ROBOT_K;
     }
     if(stand_down_time == 0.f)//第一次运行，记录当前位置作为初始位置
     {
@@ -437,8 +437,8 @@ void mode_controller::balance_mode()
     leg_drv->leg_enable = true;//上电
     for(int leg = 0; leg < 4; leg++)//启用电机PD输出
     {
-        leg_drv->cmd[leg].kp = Vec3<float>(100, 100, 100).asDiagonal() * ROBOT_K;
-        leg_drv->cmd[leg].kd = Vec3<float>(2, 2, 2).asDiagonal() * ROBOT_K;
+        leg_drv->cmd[leg].kp = Vec3<float>(60, 60, 60).asDiagonal() * ROBOT_K;
+        leg_drv->cmd[leg].kd = Vec3<float>(1.2, 1.2, 1.2).asDiagonal() * ROBOT_K;
     }
     
     if(first_run_balance)//每次重新进入该模式时都要初始化
