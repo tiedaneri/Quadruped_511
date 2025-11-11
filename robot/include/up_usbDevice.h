@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2025-09-03 16:16:09
- * @LastEditTime: 2025-11-04 11:46:22
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2025-11-11 10:04:28
+ * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Description: In User Settings Edit
  * @FilePath: /robot_software_WBC/robot/include/up_usbDevice.h
  */
@@ -31,18 +31,16 @@ public:
 
     uint8_t init_usb(void);
     bool read_and_parse_data();
-    void forceY_fixed();
 
     string port;
     uint32_t baud;
 
-    usb_device_data dataLast;           // 上一个周期的数据
     usb_device_data data;               // 解析后数据放在这
 
 private:
     int fd;
     struct termios options;
-    vector<uint8_t> _rx_buffer;         // 用于缓存从串口读取的数据
+    vector<uint8_t> _rx_buffer;         // 缓冲区，用于缓存从串口读取的数据
 
     /* 记录角位移传感器0位和90°位电压 */
     const float angleY_0   = 1.787f;
@@ -54,23 +52,15 @@ private:
     float factorY = (angleY_0 - angleY_m90)/(90.0f);
     float factorZ = (angleZ_0 - angleZ_m90)/(90.0f);
 
-    /* 记录角位移传感器0位和90°位电压 */
-    const float ref_voltageX = 2.243f;        // 参考电压 (V)
-    const float ref_voltageY = 2.222f;        // 参考电压 (V)
-    const float ref_voltageZ = 2.235f;        // 参考电压 (V)
+    /* 记录力传感器0位电压 */
+    const float ref_voltageX = 2.238f;        // 参考电压 (V)
+    const float ref_voltageY = 2.220f;        // 参考电压 (V)
+    const float ref_voltageZ = 2.237f;        // 参考电压 (V)
 
     const float gain_x = 127.34f;           // X轴AD620放大倍数
     const float gain_y = 127.67f;           // Y轴AD620放大倍数
     const float gain_z = 127.67f;           // Z轴AD620放大倍数
     
-    // 添加以下成员变量用于Y方向力的实时校准
-    const float forceY_baseline_offset = 0.0f;   // Y方向力基线偏移量 (N)
-    const float forceY_modulo = 13.904f;            // Y方向力模数回绕值 (N)
-    const float forceY_jump_threshold = 10.0f;      // 跳变检测阈值 (N)
-    float forceY_cumulative_offset = 0.0f;          // Y方向力累积偏移量 (N)
-    float forceY_cumulative_offset_last = 0.0f;     // 上一周期的累积偏移量 (N)
-    bool forceY_initialized = false;                // Y方向力是否已初始化
-
     uint8_t open_port(void);
     uint8_t configure_port(void);
 };

@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 
-# add_subdirectory(usb_test)
-add_subdirectory(at9s_test)
+add_subdirectory(usb_test)
+# add_subdirectory(usb_plot_test)
+# add_subdirectory(at9s_test)
 # add_subdirectory(gait_plan_test)
 # add_subdirectory(imu_test)
 # add_subdirectory(task_test)
